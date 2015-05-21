@@ -9,7 +9,7 @@ class CreateGivingBacks < ActiveRecord::Migration
       t.text :requirements
       t.boolean :approved
       t.boolean :completed
-      t.string :type
+      t.integer :giving_back_type
       t.string :contact_first_name
       t.string :contact_last_name
       t.string :contact_email
