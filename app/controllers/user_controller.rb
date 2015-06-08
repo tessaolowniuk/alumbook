@@ -1,7 +1,7 @@
 # Created by Tim Schneider and Maxwell Barvian
 class UserController < AuthenticatedController
   before_filter lambda{ unauthorized() unless current_login.authorized_to_show_profile? params[:id].to_i }, only: :show
-  before_filter lambda{ unauthorized() unless current_login.authorized_to_edit_profile? params[:id].to_i }, only: [:edit, :update]
+  before_filter lambda{ unauthorized() unless current_login.authorized_to_edit_profile? params[:id].to_i }, only: [:edit, :update, :destroy_avatar]
 
   # Creates an action to use for the autocomplete Company textfield
   autocomplete :company, :name, column_name: 'company_name'
@@ -50,12 +50,21 @@ class UserController < AuthenticatedController
     redirect_to :back
   end
 
+  def avatar
+    @user = User.find(params[:id])
+    @user.avatar = nil
+    @user.save
+
+    flash[:success] = "Avatar removed."
+    redirect_to :back
+  end
+
   private
 
   def user_params
     # Lord give me strength
     params.require(:user).permit(
-      :street, :city, :state, :zip, :spouse_first_name, :spouse_middle_initial,
+      :avatar, :street, :city, :state, :zip, :spouse_first_name, :spouse_middle_initial,
       :spouse_last_name, :number_children, :birth_day, :birth_month, :birth_year, :ethnicity,
       :general_opt_in, :email_opt_in, :phone_opt_in, :searchable,
       :status, :salary_range, :job_title, :start_date, :end_date,

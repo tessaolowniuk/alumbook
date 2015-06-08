@@ -52,7 +52,8 @@ Rails.application.routes.draw do
   delete '/saved_lists/:id', to: 'saved_lists#destroy'
 
   resources :user do
-    get :autocomplete_company_name, :on => :collection
+    get :autocomplete_company_name, on: :collection
+    delete :avatar, on: :member
   end
 
   resources :survey_admin, only: [:new,:new_q, :add, :create, :edit, :index]

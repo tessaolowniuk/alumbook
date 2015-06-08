@@ -1,6 +1,5 @@
 # Created by Victor, edited by Maxwell Barvian
 class User < ActiveRecord::Base
-
   # Generates CSV of
   def self.to_csv(options = {})
     CSV.generate(options) do |csv|
@@ -21,7 +20,12 @@ class User < ActiveRecord::Base
   has_many :undergraduate_degrees, dependent: :destroy
   has_many :graduate_degrees, dependent: :destroy
 
+  # PaperClip avatar
+  has_attached_file :avatar, styles: { full: '500x500#', medium: '300x300#', thumb: '100x100#' }, default_url: '/images/profile.svg'
+
   enum status: [ :currently_enrolled, :alumni ]
+
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
   accepts_nested_attributes_for :login
   accepts_nested_attributes_for :company

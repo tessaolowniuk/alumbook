@@ -2,7 +2,7 @@
 <div class="row">
   <div class="large-3 columns">
     <div class="panel">
-      <img src="http://placehold.it/500x500&text=Image">
+      <%= image_tag @user.avatar.url(:full) %>
       <h4><%= @user.login.full_name %></h4>
       <%= mail_to @user.login.try(:email) %>
     </div>
