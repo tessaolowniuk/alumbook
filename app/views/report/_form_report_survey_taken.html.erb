@@ -1,12 +1,20 @@
-<!-- Created by Brett Bush -->
-<%= form_tag("/report/show", method:"post") do %>
+<!-- author: Brett Bush -->
+
+<!-- Survey Taken Form Render -->
+<%= form_tag("/report/show", method:"post", onsubmit:"report_form_reset()") do %>
+
   <h3>Report by Survey Taken</h3>
   <p>Make a list of users who have taken a particular survey.</p>
-  <%= hidden_field_tag(:report_id, 5) %>
-  <%= hidden_field_tag(:report_name, "Survey Taken") %>
+
   <%= label_tag(:survey_select, 'Select a survey: ') %>
-  <%= select_tag(:survey_select, options_from_collection_for_select(Survey.all, :id, :survey_name)) %>
+  <%= select_tag(:survey_select, options_from_collection_for_select(Survey.all, :id, :survey_name), {:include_blank => 'All Surveys'}) %>
+
   <%= label_tag(:saved_list_type, 'Run report on: ') %>
   <%= select_tag(:saved_list_type, (options_from_collection_for_select(SavedList.where("login_id = ?", current_login.id), :id, :list_name)), {:include_blank => 'All Users'}) %>
+
+  <!-- Form identifiers -->
+  <%= hidden_field_tag(:report_id, 5) %>
+  <%= hidden_field_tag(:report_name, "Survey Taken") %>
+
   <%= submit_tag('Submit', :class => 'button') %>
 <% end %>
