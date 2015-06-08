@@ -16,11 +16,11 @@ default: &default
   username: root
 
 
-  #password: password
-  password: csc495
-  host: localhost
+  password: password
+
+  host: 127.0.0.1
   #port: 3366
-  #port: 3606
+  port: 3306
 
 
 development:
