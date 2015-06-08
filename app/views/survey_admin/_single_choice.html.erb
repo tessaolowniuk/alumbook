@@ -4,7 +4,7 @@
 
 
 <%= f.hidden_field :survey_id, value: @survey.id %>
-<%= f.hidden_field :type, value: "single_choice," %>
+<%= f.hidden_field :type, value: "single_choice" %>
 <%= f.hidden_field :display_order, value: @count %>
 
 
@@ -14,7 +14,9 @@
   <%=f.label "Required?" %>
   <%= f.check_box :required%>
 
-  <%= render partial: 'survey_admin/single' %>
+
+
+
 
 
 
