@@ -1,8 +1,9 @@
-<!-- Created by Brett Bush -->
-<p id="notice"><%= notice %></p>
+<!-- author: Brett Bush -->
 
 <div class="row">
   <div class="large-12 columns">
+
+    <!-- Display this worker or admin's saved lists -->
     <h1><%= current_login.first_name %>'s Saved Lists</h1>
 
     <table style="width:100%;">
@@ -15,6 +16,7 @@
       </thead>
 
       <tbody>
+        <!-- For each saved list of this worker or admin, display saved list name and date with Show and Delete options -->
         <% @saved_lists.each do |saved_list| %>
           <tr>
             <td><%= saved_list.list_name %></td>
@@ -25,7 +27,6 @@
         <% end %>
       </tbody>
     </table>
-
     <br>
   </div>
 </div>

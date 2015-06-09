@@ -1,0 +1,44 @@
+<!-- author: Brett Bush -->
+
+<!-- Table for displaying user information -->
+<div class="user_listing" style="overflow-x:scroll;overflow-y:scroll;height:400px;width:100%;">
+  <table class="report_results_table">
+    <thead>
+      <tr>
+        <th class="report_results_td" style="white-space: nowrap">Username</th>
+        <th class="report_results_td" style="white-space: nowrap">First Name</th>
+        <th class="report_results_td" style="white-space: nowrap">Middle Initial</th>
+        <th class="report_results_td" style="white-space: nowrap">Last Name</th>
+        <th class="report_results_td" style="white-space: nowrap">Email</th>
+        <th class="report_results_td" style="white-space: nowrap">Street</th>
+        <th class="report_results_td" style="white-space: nowrap">City</th>
+        <th class="report_results_td" style="white-space: nowrap">State</th>
+        <th class="report_results_td" style="white-space: nowrap">Company Name</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <!-- If there are users -->
+      <% if @users != nil %>
+
+        <!-- For each user, obtain and display information -->
+        <% @users.each do |user| %>
+          <% @login = Login.find(user.login_id) %>
+          <% @company = Company.find_by_id(user.company_id) %>
+          <% @user_phones = UserPhone.where('user_id = ?', user.id) %>
+          <tr>
+            <td class="report_results_td"><!-- If there is a login --><% if @login != nil %><%= @login.username %><% end %></td>
+            <td class="report_results_td"><!-- If there is a login --><% if @login != nil %><%= @login.first_name %><% end %></td>
+            <td class="report_results_td"><!-- If there is a login --><% if @login != nil %><%= @login.middle_initial %><% end %></td>
+            <td class="report_results_td"><!-- If there is a login --><% if @login != nil %><%= @login.last_name %><% end %></td>
+            <td class="report_results_td"><!-- If there is a login --><% if @login != nil %><%= @login.email %><% end %></td>
+            <td class="report_results_td"><%= user.street %></td>
+            <td class="report_results_td"><%= user.city %></td>
+            <td class="report_results_td"><%= user.state %></td>
+            <td class="report_results_td"><!-- If there is a company --><% if @company != nil %><%= @company.company_name %><% end %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

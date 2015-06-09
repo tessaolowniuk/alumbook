@@ -1,38 +1,52 @@
-<!-- Created by Brett Bush -->
+<!-- author: Brett Bush -->
 <div class="row">
   <div class="large-12 columns">
+
     <h1>Report</h1>
     <p>Select the report you would like to run.</p>
 
+    <!-- Select Dropdown that displays the hidden forms -->
     <%= label_tag(:report_type, 'Report by:') %>
-    <%= select_tag(:report_type, options_for_select([['Choose Report Type', 0], ['Date Entered', 1], ['Graduation Year', 2], ['Graduate Degree Program', 3], ["Employeer Name", 4], ["Survey Taken", 5], ["User Giving Back", 6], ["Survey Results", 7], ["User Survey Results", 8], ["Survey Completion", 9]], 0), :onchange => "onchange_report_type_handler()")%>
+    <%= select_tag(:report_type, options_for_select([['Choose Report Type', 0], ['Date Entered', 1], ['Graduation Year', 2], ['Graduate Degree Program', 3], ["Employeer Name", 4], ["Survey Taken", 5], ["User Giving Back", 6], ["Survey Results", 7], ["User Survey Results", 8]], 0), :onchange => "onchange_report_type_handler()")%>
 
+    <!-- (1) Date Entered Form -->
     <div id="report_type_form_1" style="display: none;">
       <%= render partial: 'report/form_date_entered' %>
     </div>
+
+    <!-- (2) Graduation Class Year Form -->
     <div id="report_type_form_2" style="display: none;">
       <%= render partial: 'report/form_grad_class_year' %>
     </div>
+
+    <!-- (3) Graduate Degree Form -->
     <div id="report_type_form_3" style="display: none;">
       <%= render partial: 'report/form_grad_degree_program' %>
     </div>
+
+    <!-- (4) Employer Form -->
     <div id="report_type_form_4" style="display: none;">
       <%= render partial: 'report/form_employer_name' %>
     </div>
+
+    <!-- (5) Report Survey Taken Form -->
     <div id="report_type_form_5" style="display: none;">
       <%= render partial: 'report/form_report_survey_taken' %>
     </div>
+
+    <!-- (6) Users Giving Back Form -->
     <div id="report_type_form_6" style="display: none;">
       <%= render partial: 'report/form_users_giving_back' %>
     </div>
+
+    <!-- (7) Form Survey Results Form -->
     <div id="report_type_form_7" style="display: none;">
       <%= render partial: 'report/form_survey_results' %>
     </div>
+
+    <!-- (8) User Survey Results Form -->
     <div id="report_type_form_8" style="display: none;">
       <%= render partial: 'report/form_user_survey_results' %>
-    </div>
-    <div id="report_type_form_9" style="display: none;">
-      <%= render partial: 'report/form_survey_completion' %>
     </div>
   </div>
 </div>

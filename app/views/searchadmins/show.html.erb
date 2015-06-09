@@ -1,0 +1,12 @@
+<!--Created by Leiyang Guo
+With minimal assistance and advice with James Maher-->
+<%= form_tag("/saved_lists/create", method:"post") do %>
+  <h3>Create Saved List</h3>
+  <p>Make a list of users by their employer name.</p>
+  <%= label_tag(:list_name, 'Saved list name:') %>
+  <%= text_field_tag(:list_name) %>
+  <% @objectIds.each do |objectId| %>
+    <%= hidden_field_tag "user_ids[]", objectId %>
+  <% end %>
+  <%= submit_tag('Submit', :class => "round button", :login_id => current_login.id, :date_saved => Time.zone.now.beginning_of_day) %>
+<% end %>
