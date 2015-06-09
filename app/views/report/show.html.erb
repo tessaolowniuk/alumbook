@@ -1,31 +1,27 @@
-<!-- Created by Brett Bush -->
+<!-- author: Brett Bush -->
 <div class="row">
   <div class="large-12 columns">
-    <h1><%= @report_header %> Report Results</h1>
+
+    <!-- Display report name in header -->
+    <h1><%= @report_name %> Report Results</h1>
+
+    <!-- Hidden header for displaying datetime on print -->
     <h3 id="print_date"></h3>
+
+    <!-- Excel Button -->
     <%= link_to "Excel (.xls)", params.merge(:format => 'xls'), :class => "button small noprint", method: :post %>
-    <!--<%= link_to "PDF (.pdf)", params.merge(:format => 'pdf'), :class => "button small noprint", method: :post %>-->
+
+    <!-- Print Button -->
     <button type="button" class="button small noprint" onclick="report_print_page();">Print</button>
+
+    <!-- If results display user information -->
     <% if @report_id.to_i < 7 %>
-    <%= render partial: 'report/form_new_saved_list' %>
+      <%= render partial: 'report/form_new_saved_list' %>
+      <%= render partial: 'report/user_info_table' %>
+
+    <!-- Else results list survey information -->
+    <% elsif @report_id.to_i == 7 || @report_id.to_i == 8 %>
+      <%= render partial: 'report/user_survey_results_table' %>
     <% end %>
-    <div class="user_listing" style="overflow-y:scroll;height:400px">
-      <table class="report_results_table" style="width:100%;">
-        <thead>
-        <tr><th class="report_results_td">ID</th><th class="report_results_td">Street</th><th class="report_results_td">City</th></tr>
-        </thead>
-        <tbody>
-          <% if @users != nil %>
-          <% @users.each do |user| %>
-            <tr>
-              <td class="report_results_td"><%= user.id %></td>
-              <td class="report_results_td"><%= user.street %></td>
-              <td class="report_results_td"><%= user.city %></td>
-            </tr>
-          <% end %>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
   </div>
 </div>

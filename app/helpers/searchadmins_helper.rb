@@ -1,4 +1,8 @@
+# Created by Leiyang Guo
+# With minimal assistance and advice with James Maher
+# Helper containing helper methods for Searchadmins
 module SearchadminsHelper
+  # Helper creating an add field button with functionality implemented by coffeescript
   def link_to_add_fields(name, f, type, locals={})
     new_object = f.object.send "build_#{type}"
     id = "new_#{type}"
@@ -8,36 +12,45 @@ module SearchadminsHelper
     link_to(name, '#', class: "add_fields " + locals[:class], data: {id: id, fields: fields.gsub("\n", "")})
   end
   
+  # Set fields to be searched and displayed
   def model_fields
-    # which fields to display and sort by
+    # Which fields to display and sort by
     [:first_name, :last_name, :email]
   end
   
+  # Debugging method for checking sql call
   def display_query_sql(users)
     "SQL: #{users.to_sql}"
   end
   
+  # Set action "advanced_search" with method post and get
   def action
     action_name == 'advanced_search' ? :post : :get
   end
   
+  # Display result header with active sorting link
   def display_sort_column_headers(search)
     model_fields.each_with_object('') do |field, string|
       string << content_tag(:th, sort_link(search, field, {}, method: action))
     end
   end
   
+  # Display all search results for an advanced search
   def display_search_results(objects)
     objects.each_with_object('') do |object, string|
       string << content_tag(:tr, display_search_results_row(object))
     end
   end
   
+  # Return and display search result in specific row with links to user profiles
   def display_search_results_row(object)
+    # Store variable for saved list
+    session[:sResult].push(object.id)
+    
     fieldCount = 0
     model_fields.each_with_object('') do |field, string|
       if fieldCount == 0
-        string << content_tag(:td, link_to(object.send(field), logins_path + '/' + object.id.to_s))#code
+        string << content_tag(:td, link_to(object.send(field), '/admin/logins/' + object.id.to_s))#code
       else
         string << content_tag(:td, object.send(field))
       end

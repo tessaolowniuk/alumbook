@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="150px" height="150px" viewBox="0 0 150 150" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3.2 (12043) - http://www.bohemiancoding.com/sketch -->
+    <title>Slice 1</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="150" height="150"></rect>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <mask id="mask-2" sketch:name="Mask" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <use id="Mask" fill="#C5C5C5" sketch:type="MSShapeGroup" xlink:href="#path-1"></use>
+        <ellipse id="Body" fill="#FFFFFF" sketch:type="MSShapeGroup" mask="url(#mask-2)" cx="75.5" cy="148" rx="55.5" ry="60"></ellipse>
+        <circle id="Face" fill="#FFFFFF" sketch:type="MSShapeGroup" mask="url(#mask-2)" cx="74.5" cy="60" r="33"></circle>
+    </g>
+</svg>

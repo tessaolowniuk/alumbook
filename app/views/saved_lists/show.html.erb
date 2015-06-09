@@ -1,27 +1,55 @@
-<!-- Created by Brett Bush -->
-<p id="notice"><%= notice %></p>
+<!-- author: Brett Bush -->
 
 <div class="row">
   <div class="large-12 columns">
+
     <h1><%= @saved_list.list_name %></h1>
     <h3 id="print_date"></h3>
+
+    <!-- Excel Button -->
     <%= link_to "Excel (.xls)", params.merge(:format => 'xls'), :class => "button small noprint", method: :post %>
-    <!--<%= link_to "PDF (.pdf)", params.merge(:format => 'pdf'), :class => "button small noprint", method: :post %>-->
+
+    <!-- Print Button -->
     <button type="button" class="button small noprint" onclick="saved_list_print_page();">Print</button>
-    <div class="user_listing" style="overflow-y:scroll;height:400px">
-      <table class="saved_list_table" style="width:100%;">
+
+    <!-- Table for displaying user information -->
+    <div class="user_listing" style="overflow-x:scroll;overflow-y:scroll;height:400px;width:100%;">
+      <table class="saved_list_table">
         <thead>
-        <tr><th class="saved_list_td">ID</th><th class="saved_list_td">Street</th><th class="saved_list_td">City</th></tr>
+          <tr>
+            <th class="saved_list_td" style="white-space: nowrap">Username</th>
+            <th class="saved_list_td" style="white-space: nowrap">First Name</th>
+            <th class="saved_list_td" style="white-space: nowrap">Middle Initial</th>
+            <th class="saved_list_td" style="white-space: nowrap">Last Name</th>
+            <th class="saved_list_td" style="white-space: nowrap">Email</th>
+            <th class="saved_list_td" style="white-space: nowrap">Street</th>
+            <th class="saved_list_td" style="white-space: nowrap">City</th>
+            <th class="saved_list_td" style="white-space: nowrap">State</th>
+            <th class="saved_list_td" style="white-space: nowrap">Company Name</th>
+          </tr>
         </thead>
         <tbody>
+
+          <!-- If there are users -->
           <% if @users != nil %>
-          <% @users.each do |user| %>
-            <tr>
-              <td class="saved_list_td"><%= user.id %></td>
-              <td class="saved_list_td"><%= user.street %></td>
-              <td class="saved_list_td"><%= user.city %></td>
-            </tr>
-          <% end %>
+
+            <!-- For each user, obtain and display information -->
+            <% @users.each do |user| %>
+              <% @login = Login.find(user.login_id) %>
+              <% @company = Company.find_by_id(user.company_id) %>
+              <% @user_phones = UserPhone.where('user_id = ?', user.id) %>
+              <tr>
+                <td class="saved_list_td"><!-- If there is a login --><% if @login != nil %><%= @login.username %><% end %></td>
+                <td class="saved_list_td"><!-- If there is a login --><% if @login != nil %><%= @login.first_name %><% end %></td>
+                <td class="saved_list_td"><!-- If there is a login --><% if @login != nil %><%= @login.middle_initial %><% end %></td>
+                <td class="saved_list_td"><!-- If there is a login --><% if @login != nil %><%= @login.last_name %><% end %></td>
+                <td class="saved_list_td"><!-- If there is a login --><% if @login != nil %><%= @login.email %><% end %></td>
+                <td class="saved_list_td"><%= user.street %></td>
+                <td class="saved_list_td"><%= user.city %></td>
+                <td class="saved_list_td"><%= user.state %></td>
+                <td class="saved_list_td"><!-- If there is a company --><% if @company != nil %><%= @company.company_name %><% end %></td>
+              </tr>
+            <% end %>
           <% end %>
         </tbody>
       </table>

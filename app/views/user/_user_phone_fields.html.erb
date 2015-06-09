@@ -1,18 +1,35 @@
-<div class="nested-fields">
-  <%= f.label :area_code %>
-  <%= f.text_field :area_code %>
-
-  <%= f.label :prefix %>
-  <%= f.text_field :prefix %>
-
-  <%= f.label :suffix %>
-  <%= f.text_field :suffix %>
-
-  <%= f.label :extension %>
-  <%= f.text_field :extension %>
-
-  <%= f.label :type %>
-  <%= f.select :type, UserPhone.types.map { |w,| [w.humanize, w] } %>
-
-  <%= link_to_remove_association 'remove phone', f %>
+<div class="pack pack-middle nested-fields">
+  <div class="pack-item pack-full">
+    <div class="row">
+      <div class="medium-3 columns">
+        <%= f.label :type %>
+        <%= f.select :type, UserPhone.types.map { |w,| [w.humanize, w] } %>
+      </div>
+      <div class="medium-2 columns">
+        <%= f.label :area_code %>
+        <%= f.text_field :area_code %>
+      </div>
+      <div class="medium-2 columns">
+        <%= f.label :prefix %>
+        <%= f.text_field :prefix %>
+      </div>
+      <div class="medium-3 columns">
+        <%= f.label :suffix %>
+        <%= f.text_field :suffix %>
+      </div>
+      <div class="medium-2 columns">
+        <%= f.label :extension %>
+        <%= f.text_field :extension %>
+      </div>
+    </div>
+  </div>
+  <div class="pack-item pack-shrink">
+    <ul class="button-group actions">
+      <li>
+        <%= link_to_remove_association f, class: 'small alert icon button' do %>
+          <i class="fi-x"></i>
+        <% end %>
+      </li>
+    </ul>
+  </div>
 </div>

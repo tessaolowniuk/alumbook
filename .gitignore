@@ -5,3 +5,13 @@
 #   git config --global core.excludesfile '~/.gitignore_global'
 
 
+<<<<<<< HEAD
+=======
+# Ignore all logfiles and tempfiles.
+/log/*
+!/log/.keep
+/tmp
+
+# Ignore local asset pipeline cache files
+/public/assets
+>>>>>>> c99fb3f70b3f4276bd453e075e357b5dbda28dde

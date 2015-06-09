@@ -1,4 +1,4 @@
-
+<!See all questions in survey, add questions>
 <div class="row">
   <div class="large-12 columns">
     <h1><%=@survey.survey_name%></h1>
@@ -13,6 +13,12 @@
       <tr>
         <td><%= q.text %></td>
         <td><%= q.type%></td>
+        <% if q.type!='short_answer' %>
+          <td><%= link_to 'Response Options', action: 'choices', :id => q.id %></td>
+          <%end%>
+          <% if q.type=='sub_questions' %>
+          <td><%= link_to 'Sub Questions', action: 'sub_questions', :id => q.id %> </td>
+          <%end%>
 
       </tr>
       <% end %>

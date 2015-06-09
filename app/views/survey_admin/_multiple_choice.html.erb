@@ -4,7 +4,7 @@
 
 
 <%= f.hidden_field :survey_id, value: @survey.id %>
-<!%= f.hidden_field :type, value: "multiple_choice," %>
+<%= f.hidden_field :type, value: "multi_choice" %>
 <%= f.hidden_field :display_order, value: @count %>
 
 
@@ -16,5 +16,5 @@
 
 
 </div>
-<%= f.submit %>
+<%= f.submit "Submit" , :class => "round button"%>
 <% end %>

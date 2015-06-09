@@ -1,0 +1,52 @@
+<!--Use form_for to render form for adding new login details -->
+<% include_type = false if local_assigns[:include_type].nil? %>
+
+<div class="row">
+  <div class="medium-9 columns <%= error_class @login, :first_name %>">
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name%>
+    <%= errors @login, :first_name %>
+  </div>
+  <div class="medium-3 columns <%= error_class @login, :middle_initial %>">
+    <%= f.label :middle_initial, 'MI' %>
+    <%= f.text_field :middle_initial, maxlength: 1 %>
+  </div>
+</div>
+<div class="<%= error_class @login, :last_name %>">
+  <%= f.label :last_name %>
+  <%= f.text_field :last_name %>
+  <%= errors @login, :last_name %>
+</div>
+
+<fieldset>
+  <legend class="has-border">Login</legend>
+  <ol class="form">
+    <% if include_type %>
+      <li>
+        <%= f.label :"Type" %>
+        <%= f.select :type, Login.types.map { |w,| [w.humanize, w] }, selected: :user %>
+      </li>
+    <% end %>
+
+    <li class="<%= error_class @login, :email %>">
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+      <%= errors @login, :email %>
+    </li>
+    <li class="<%= error_class @login, :username %>">
+      <%= f.label :username %>
+      <%= f.text_field :username %>
+      <%= errors @login, :username %>
+    </li>
+    <li class="<%= error_class @login, :password %>">
+      <%= f.label :password %>
+      <%= f.password_field :password, autocomplete: "off" %>
+      <%= errors @login, :password %>
+    </li>
+    <li class="<%= error_class @login, :password_confirmation %>">
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation, autocomplete: "off" %>
+      <%= errors @login, :password_confirmation %>
+    </li>
+  </ol>
+</fieldset>

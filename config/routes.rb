@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'searchadmins/add' => 'searchadmins#add'
   get 'searchadmins/index'
 
   resources :searchadmins do
@@ -29,7 +30,14 @@ Rails.application.routes.draw do
   get 'contact' => 'contact#index'
   get 'survey/index' => 'survey#index'
   get 'report/index' => 'report#index'
+
   get 'survey_admin/edit' => 'survey_admin#edit'
+  post 'survey_admin/edit' => 'survey_admin#edit'
+  get 'survey_admin/choices' => 'survey_admin#choices'
+  post 'survey_admin/choices' => 'survey_admin#choices'
+  get 'survey_admin/sub_questions' => 'survey_admin/sub_questions'
+  post 'survey_admin/sub_questions' => 'survey_admin/sub_questions'
+
 
   get 'saved_lists/index' => 'saved_lists#index'
   post 'saved_lists/create' => 'saved_lists#create'
@@ -39,11 +47,13 @@ Rails.application.routes.draw do
   get 'survey_admin/publish' => 'survey_admin#publish'
   get 'survey/take' => 'survey#take'
   post 'report/show' => 'report#show'
+  post 'survey/take' => 'survey#take'
 
   post 'report/create' => 'report#create'
 
   post 'survey_admin/edit' =>'survey_admin#edit'
   post 'survey/index' => 'survey#index'
+#  post 'survey_admin/new_q' => 'survey_admin#new_q'
 
 
   get '/saved_lists/:id', to: 'saved_lists#show', as: 'saved_list'
@@ -52,11 +62,12 @@ Rails.application.routes.draw do
   delete '/saved_lists/:id', to: 'saved_lists#destroy'
 
   resources :user do
-    get :autocomplete_company_name, :on => :collection
+    get :autocomplete_company_name, on: :collection
+    delete :avatar, on: :member
   end
 
-  resources :survey_admin, only: [:new,:new_q, :add, :create, :edit, :index]
-
+  resources :survey_admin, only: [:new,:new_q, :add, :create, :edit, :index, :choices, :sub_questions]
+  resources :survey, only: [:index, :take, :create, :add]
   resources :internships, only: [:index]
   resources :giving_backs, only: [:create] do
     get :autocomplete_company_name, :on => :collection
@@ -70,7 +81,7 @@ Rails.application.routes.draw do
       get 'completed', on: :collection
       get 'archived', on: :collection
     end
-    resources :logins
+    resources :accounts
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
