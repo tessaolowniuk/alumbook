@@ -1,5 +1,5 @@
+# Created by Brad Bilter, edited by Maxwell Barvian
 class Admin::AccountsController < AdminController
-  #Brad Bilter
 
   #Helper methods for sorting
   helper_method :sort_column, :sort_direction
@@ -15,6 +15,7 @@ class Admin::AccountsController < AdminController
   end
 
   def new
+    @login = Login.new
   end
 
   #Selects existing user by selected ID to display
@@ -32,8 +33,8 @@ class Admin::AccountsController < AdminController
       flash[:success] = "Account created"
       redirect_to action: 'index'
     else
-      flash[:alert] = "Account NOT created"
-      redirect_to :back
+      # flash[:alert] = "Account NOT created"
+      render 'new'
     end
   end
 
@@ -42,12 +43,12 @@ class Admin::AccountsController < AdminController
     @login = Login.find(params[:id])
 
     #Test for save successful and react
-    if @login.update(login_params)
+    if @login.update(login_params.to_h.deep_reject { |k, v| ['password', 'password_confirmation'].include?(k) && v.blank? })
       flash[:success] = "Account updated"
-      redirect_to action: 'show'
+      redirect_to :back
     else
       flash[:alert] = "Account NOT updated"
-      redirect_to :back
+      render 'edit'
     end
   end
 
@@ -57,10 +58,11 @@ class Admin::AccountsController < AdminController
     @login = Login.find(params[:id])
     if @login.destroy
       flash[:success] = "Account deleted"
-      redirect_to :action => 'index'
     else
       flash[:alert] = "Account NOT deleted"
     end
+
+    redirect_to :back
   end
 
   #Private methods
@@ -71,7 +73,7 @@ class Admin::AccountsController < AdminController
   #that means you must explicitly specify records
   #to be added
   def login_params
-      params.require(:login).permit(:first_name, :middle_initial, :last_name, :username, :password, :type, :created_at, :updated_at, :last_sign_in_at, :email, :password_confirmation  )
+      params.require(:login).permit(:first_name, :middle_initial, :last_name, :username, :type, :created_at, :updated_at, :last_sign_in_at, :email, :password, :password_confirmation)
   end
 
   #sort column method that prevents sql injection

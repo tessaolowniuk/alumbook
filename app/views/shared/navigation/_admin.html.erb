@@ -17,10 +17,7 @@
       <a href="#">Account</a>
       <ul class="dropdown">
         <li>
-          	<%= link_to 'My Account', admin_account_path(current_login) %>
-        </li>
-       <li>
-          <%= link_to 'Edit My Account', edit_admin_account_path(current_login) %>
+          	<%= link_to 'My Account', edit_admin_account_path(current_login) %>
         </li>
         <li>
           <%= link_to 'Manage User Accounts', admin_accounts_path %>

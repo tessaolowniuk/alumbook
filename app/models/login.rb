@@ -38,6 +38,11 @@ class Login < ActiveRecord::Base
     id == user.id
   end
 
+  def authorized_to_edit_account?(id)
+    login = Login.find(id)
+    admin? || self.id == id || (worker? && login.user?)
+  end
+
   def full_name
     "#{first_name}#{' ' + middle_initial.upcase + '.' if middle_initial} #{last_name}"
   end
