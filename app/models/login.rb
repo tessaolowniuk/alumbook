@@ -10,7 +10,12 @@ class Login < ActiveRecord::Base
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable,
          :authentication_keys => [:logon]
+
   has_one :user, dependent: :destroy
+
+  has_many :saved_lists, dependent: :destroy
+  has_many :surveys
+
   self.inheritance_column = nil
 
   enum type: [ :worker, :admin, :user ]
