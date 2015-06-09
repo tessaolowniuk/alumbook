@@ -10,7 +10,8 @@ Rails.application.routes.draw do
       root to: 'devise/sessions#new', as: :unauthenticated_root
     end
   end
-
+  
+  get 'searchadmins/add' => 'searchadmins#add'
   get 'searchadmins/index'
 
   resources :searchadmins do
