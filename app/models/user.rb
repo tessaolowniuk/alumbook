@@ -20,6 +20,9 @@ class User < ActiveRecord::Base
   has_many :undergraduate_degrees, dependent: :destroy
   has_many :graduate_degrees, dependent: :destroy
 
+  #Victor Bashorun
+  has_many :SavedListUsers, dependent: :destroy
+
   # PaperClip avatar
   has_attached_file :avatar, styles: { full: '500x500#', medium: '300x300#', thumb: '100x100#' }, default_url: '/images/profile.svg'
 
@@ -33,4 +36,4 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :user_phones, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :undergraduate_degrees, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :graduate_degrees, reject_if: :all_blank, allow_destroy: true
-end # added by Leiyang Guo
+end
