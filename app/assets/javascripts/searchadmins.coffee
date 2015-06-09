@@ -1,12 +1,12 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+# Created by Leiyang Guo
+# With minimal assistance/advice from James Maher and Maxwell Barvian
 ready = ->
-  # console.log 'loaded '
+  # Add click action for remove_field link'
   $('form').on 'click', '.remove_fields', (event) ->
     $(this).closest('.field').remove()
     event.preventDefault()
 
+  # Add click action for add_field button
   $('form').on 'click', '.add_fields', (event) ->
     time = new Date().getTime()
     regexp = new RegExp($(this).data('id'), 'g')

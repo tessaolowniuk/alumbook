@@ -1,15 +1,30 @@
+<!--Created by Leiyang Guo
+With minimal assistance and advice with James Maher
+Using Foundation 5 and Ransack advanced search form-->
 <%= search_form_for @search, url: search_searchadmins_path, html: { method: :post } do |f| %>
   
     <%= f.condition_fields do |c| %>
       <%= render "condition_fields", f: c %>
     <% end %>
-  
+    
+  <!--Button for add condition, association type "or"-->
   <p>
-    <%= link_to_add_fields "Add Conditions", f, :condition, class: "button" %>
+    <div class="row">
+        <div class="large-12 small-12 columns">
+            <%= link_to_add_fields "Add Conditions", f, :condition, class: "small round button" %>
+        </div>
+    </div>
   </p>
-  <%= f.submit "search", :class => "button" %>
+  
+  <div class="row">
+    <div class="large-12 small-12 columns">
+      <%= f.submit "search", :class => "round button" %>
+    </div>
+  </div>
 <% end %>
 
+<!--Partial to result-->
 <% if @showResult == true %>
     <%= render 'results' %>
 <% end %>
+
