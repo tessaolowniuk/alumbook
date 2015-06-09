@@ -1,0 +1,14 @@
+<%=form_for :user_survey_response, url: survey_index_path do |f|%>
+<%=f.hidden_field :survey_id, value: q.survey_id %>
+<%=f.hidden_field :question_id, value: q%>
+
+<%options = SurveyQuestionOption.where(survey_question_id: q)%>
+
+<%options.each do |o|%>
+<%=f.label o.text %>
+<%=f.radio_button :survey_question_option_id, value: o %><br>
+<%end%>
+<br>
+<%=f.submit "Submit", :class => "round button"%>
+
+<%end%>

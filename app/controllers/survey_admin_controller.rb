@@ -1,23 +1,27 @@
-class SurveyAdminController < ApplicationController
+#SurveyAdminController Created by Jeffrey Mayer
+#Everything related to Survey_Admin was created by Jeffrey Mayer with the
+#Exception of the .js file that Brett did the googling for to find that
+class SurveyAdminController < AuthenticatedController
+  #list of all surveys, ability to add new survey, publish survey
   def index
     @survey = Survey.all rescue nil
   end
   def add
 
   end
-
+  #new question page
   def new_q
     @survey = Survey.find(params[:id]) rescue nil
     @count = :display_order
 
   end
-
+  #add choices for all but short answer
   def choices
 
     @question = SurveyQuestion.find(params[:id])
     @options = SurveyQuestionOption.where(survey_question_id: params[:id]) rescue nil
   end
-
+  #sub questions for multi_question
   def sub_questions
     @question = SurveyQuestion.find(params[:id])
     @sub = SurveyQuestionOptionsChoice.where(survey_question_id: params[:id]) rescue nil
@@ -26,6 +30,7 @@ class SurveyAdminController < ApplicationController
 
   def new
   end
+  #Edit survey page to add questions
   def edit
       @survey = Survey.find(params[:id]) rescue nil
       @question = SurveyQuestion.where(survey_id: params[:id]) rescue nil
@@ -34,7 +39,7 @@ class SurveyAdminController < ApplicationController
 
     end
 
-
+    #publish survey for users to view/take
     def publish
   survey = Survey.find(params[:id]) rescue nil
   survey.update_attributes(status: 'published')
@@ -43,7 +48,7 @@ class SurveyAdminController < ApplicationController
 end
 
 
-
+#create methods for form submissions in each view
   def create
     # render plain: params[:survey].inspect
 
@@ -75,7 +80,7 @@ end
     end
 
   private
-
+  #Parameter definition for new database entries
   def survey_params
     params.require(:survey).permit(:survey_name, :login_id,
     :survey_description , :status, :date_created, :status,
