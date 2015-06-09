@@ -8,6 +8,6 @@ With minimal assistance and advice with Brett Bush-->
     <%= hidden_field_tag "user_ids[]", objectId %>
   <% end %>
   <%= hidden_field_tag(:login_id, current_login.id) %>
-  <%= hidden_field_tag (:date_saved, Time.zone.now.beginning_of_day) %>
+  <%= hidden_field_tag(:date_saved, Time.zone.now.beginning_of_day) %>
   <%= submit_tag('Submit', :class => "round button") %>
 <% end %>
