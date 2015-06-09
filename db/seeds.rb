@@ -12,8 +12,9 @@ Survey.create!([
   {login_id: nil, survey_name: "Test Survey_3", survey_description: "Test Survey_3", date_created: nil, status: nil},
   {login_id: nil, survey_name: "Test Survey_4", survey_description: "Test Survey_4", date_created: nil, status: nil},
   {login_id: nil, survey_name: "Test Survey_5", survey_description: "Test Survey_5", date_created: nil, status: nil},
-  {login_id: nil, survey_name: "Test Survey_6", survey_description: "Test Survey_6", date_created: nil, status: nil}
+  {login_id: nil, survey_name: "Test Survey_6", survey_description: "Test Survey_6", date_created: nil, status: nil},
 ])
+
 User.destroy_all
 User.create!([
   {login_id: 1, company_id: nil, street: "123 Front St", city: "Naperville", state: "IL", zip: 60504,  spouse_first_name: nil, spouse_middle_initial: nil, spouse_last_name: nil, number_children: nil, birth_month: 0, birth_day: nil, birth_year: nil, ethnicity: nil, general_opt_in: nil, email_opt_in: nil, phone_opt_in: nil, badges_opt_in: nil, status: nil, salary_range: nil, job_title: nil, start_date: nil, end_date: nil, searchable: nil, subscription_type: nil},
