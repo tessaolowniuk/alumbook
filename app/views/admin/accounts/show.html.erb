@@ -1,8 +1,8 @@
 <!--Brad Bilter -->
-<!--RESTful action UPDATE called after EDIT is submitted-->
+<!--RESTful action SHOW standard route-->
 <div class="row">
   <div class="large-12 columns">
-    <h1>Login Details</h1>
+    <h1>Account Details</h1>
     <br>
     <!--Display current information from LOGIN model-->
     <p>
@@ -17,12 +17,12 @@
         <!--if not then display "Not Found"-->
         <span style="margin-left:2em"><strong>Not Found</strong><br><br><br>
       <% end %>
-      
+
       <!--Display remaining login details all from LOGIN model-->
       <strong>Username: </strong><%= @login.username.upcase%><br>
       <strong>Type: </strong><%= @login.type.upcase%>  <br>
       <strong>Account Created: </strong><%= @login.created_at.to_s(:date_format)%><br> <!--date_format defined in environment.rb for global use-->
-      <strong>Last Updated: </strong><%= @login.updated_at.to_s(:date_format)%><br> 
+      <strong>Last Updated: </strong><%= @login.updated_at.to_s(:date_format)%><br>
       <strong>Last Logged in: </strong><%= @login.last_sign_in_at.to_s(:date_format)%><br>
       <strong>Number of Logins: </strong><%= @login.sign_in_count.to_s(:date_format)%><br>
     </p>
