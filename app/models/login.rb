@@ -13,7 +13,7 @@ class Login < ActiveRecord::Base
 
   #Associations
   has_one :User
-  has_many :SavedLists, dependent: :destory
+  has_many :SavedLists, dependent: :destroy
   has_many :Surveys
   self.inheritance_column = nil
 
