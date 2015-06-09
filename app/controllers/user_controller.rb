@@ -62,7 +62,7 @@ class UserController < AuthenticatedController
   private
 
   def redirect_admins!
-    redirect_to '/admin/logins#index' if current_login.worker? || current_login.admin?
+    redirect_to '/admin/accounts#index' if current_login.worker? || current_login.admin?
   end
 
   def user_params

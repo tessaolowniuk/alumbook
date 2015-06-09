@@ -35,7 +35,7 @@
       <section role="tabpanel" aria-hidden="false" class="content active" id="panel2-1">
         <div class="large-6 columns">
           <!--Use form_for to display the edit form for LOGIN-->
-          <%= form_for :login, url: admin_login_path(@login), method: :patch do |f| %>
+          <%= form_for :login, url: admin_account_path(@login), method: :patch do |f| %>
             <!--Displays errors with submission if any-->
             <% if @login.errors.any? %>
               <div id="error_explanation">
@@ -75,7 +75,7 @@
       <!--Reset Password Tab-->
       <section role="tabpanel" aria-hidden="true" class="content" id="panel2-2">
         <!--Use form_for to display the edit form for LOGIN-->
-        <%= form_for :login, url: admin_login_path(@login), method: :patch do |f| %>
+        <%= form_for :login, url: admin_account_path(@login), method: :patch do |f| %>
           <!--Displays errors with submission if any-->
           <% if @login.errors.any? %>
             <div id="error_explanation">

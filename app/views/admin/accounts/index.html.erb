@@ -3,7 +3,7 @@
 <div class="row">
   <div class="large-12 columns">
     <div class="clearfix">
-      <%= link_to 'New Account', new_admin_login_path, class: 'new small success right radius button' %>
+      <%= link_to 'New Account', new_admin_account_path, class: 'new small success right radius button' %>
       <h1>Account Manager</h1>
     </div>
     <!--Class pretty pulls sort icons-->
@@ -21,7 +21,7 @@
       <tbody>
         <% # Loop through logins %>
         <% @login.each do |f| %>
-          <tr data-clickable="<%= admin_login_path(f) %>">
+          <tr data-clickable="<%= admin_account_path(f) %>">
             <td><%= f.first_name.camelize %></td>
             <td><%= f.middle_initial.upcase %></td>
             <td><%= f.last_name.camelize %></td>
@@ -30,12 +30,12 @@
             <td>
               <ul class="button-group actions">
                 <li>
-                  <%= link_to edit_admin_login_path(f), title: 'Edit', class: 'small icon button' do %>
+                  <%= link_to edit_admin_account_path(f), title: 'Edit', class: 'small icon button' do %>
                     <i class="fi-pencil"></i>
                   <% end %>
                 </li>
                 <li>
-                  <%= link_to admin_login_path(f), method: :delete, title: 'Delete', data: { confirm: "Are you sure?" }, class: 'small alert icon button' do %>
+                  <%= link_to admin_account_path(f), method: :delete, title: 'Delete', data: { confirm: "Are you sure?" }, class: 'small alert icon button' do %>
                     <i class="fi-x"></i>
                   <% end %>
                 </li>
