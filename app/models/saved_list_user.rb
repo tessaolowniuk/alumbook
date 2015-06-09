@@ -1,5 +1,5 @@
 #Created by Victor
 class SavedListUser < ActiveRecord::Base
-  belongs_to :User
-  belongs_to :SavedList
+  belongs_to :user
+  belongs_to :saved_list
 end
