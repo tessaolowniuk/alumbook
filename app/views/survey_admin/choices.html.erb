@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="large-12 columns">
+  <h1>Add Response Options</h1>
+
+
+<% count = 0 %>
+  <% @options.each do |q| %>
+  <% count = count + 1 %>
+  <tr>
+    <td><%= q.text %></td><br>
+    <%end%>
+
+
+<%= form_for :survey_question_option, url: survey_admin_index_path do |f| %>
+
+<p>
+  <br>
+  <%= f.label "Option" %><br>
+  <%= f.text_field :text %>
+
+</p>
+
+
+  <%= f.hidden_field :survey_question_id, value: @question.id%>
+  <%= f.hidden_field :display_order, value: @count %>
+</p>
+
+  <%= f.submit %> <%=link_to "Done", action: 'edit', :id => @question.survey_id %>
+<% end %>
+  </div>
+  </div>
