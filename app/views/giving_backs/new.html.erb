@@ -58,7 +58,7 @@
           </div>
         </div>
         <div class="<%= error_class @opportunity, :contact_email %>">
-          <%= f.label :contact_email %>
+          <%= f.label :contact_email, 'Email' %>
           <%= f.email_field :contact_email %>
           <%= errors @opportunity, :contact_email %>
         </div>
