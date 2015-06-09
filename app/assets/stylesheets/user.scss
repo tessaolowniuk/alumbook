@@ -1,0 +1,16 @@
+.profile-avatar {
+  margin-bottom: rem-calc(10);
+  position: relative;
+  text-align: center;
+
+  > img {
+    display: inline-block;
+  }
+}
+
+  .profile-avatar-delete {
+    position: absolute;
+    right: 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    top: 0;
+  }

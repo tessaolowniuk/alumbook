@@ -40,14 +40,13 @@ class UserController < AuthenticatedController
     end
 
     if @user.update(profile.deep_reject { |k, v| ['password', 'password_confirmation'].include?(k) && v.blank? })
-      Rails.logger.info(profile.inspect)
       flash[:success] = "Profile updated."
+      redirect_to action: 'show'
     else
-      Rails.logger.info(@user.errors.inspect)
       flash[:alert] = "Your profile could not be updated."
+      redirect_to :back
     end
 
-    redirect_to :back
   end
 
   def avatar

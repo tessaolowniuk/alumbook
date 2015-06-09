@@ -654,14 +654,14 @@ $fieldset-border-style: solid;
 $fieldset-border-width: 1.5px;
 $fieldset-border-color: scale-color($aluminum, $lightness: 50%);
 $fieldset-padding: 0;
-// $fieldset-margin: rem-calc(18 0);
+$fieldset-margin: rem-calc(20 0);
 
 // We use these to style the legends when you use them
 $legend-bg: none;
 $legend-font-weight: $font-weight-bold;
 $legend-text-transform: uppercase;
 $legend-padding: 0;
-$legend-margin-bottom: rem-calc(25);
+$legend-margin-bottom: rem-calc(20);
 
 // We use these to style the prefix and postfix input elements
 // $input-prefix-bg: scale-color($white, $lightness: -5%);
