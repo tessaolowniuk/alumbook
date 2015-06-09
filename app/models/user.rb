@@ -10,18 +10,18 @@ class User < ActiveRecord::Base
     end
   end
 
-  # Leiyang Guo set association
+  # Leiyang Guo and Victor Bashorun set association
+
   belongs_to :login
   belongs_to :company
   has_one :saved_lists, through: :saved_list_users
+  has_many :saved_list_users, dependent: :destroy
+  has_many :user_surveys
   has_many :surveys, through: :user_surveys
   has_many :giving_backs
   has_many :user_phones, dependent: :destroy
   has_many :undergraduate_degrees, dependent: :destroy
   has_many :graduate_degrees, dependent: :destroy
-
-  #Victor Bashorun
-  has_many :SavedListUsers, dependent: :destroy
 
   # PaperClip avatar
   has_attached_file :avatar, styles: { full: '500x500#', medium: '300x300#', thumb: '100x100#' }, default_url: '/images/profile.svg'

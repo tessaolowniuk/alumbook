@@ -12,8 +12,9 @@ class Login < ActiveRecord::Base
          :authentication_keys => [:logon]
 
   #Associations
-  has_one :user
-  has_many :savedLists, dependent: :destory
+  has_one :User
+  has_many :SavedLists, dependent: :destory
+  has_many :Surveys
   self.inheritance_column = nil
 
   enum type: [ :worker, :admin, :user ]
