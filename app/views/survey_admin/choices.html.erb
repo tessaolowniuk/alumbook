@@ -1,3 +1,4 @@
+<!Create the answers for multiple choice/single choice questions>
 <div class="row">
   <div class="large-12 columns">
   <h1>Add Response Options</h1>
@@ -22,10 +23,10 @@
 
 
   <%= f.hidden_field :survey_question_id, value: @question.id%>
-  <%= f.hidden_field :display_order, value: @count %>
+  <%= f.hidden_field :display_order, value: count %>
 </p>
 
-  <%= f.submit %> <%=link_to "Done", action: 'edit', :id => @question.survey_id %>
+  <%= f.submit "Submit", :class => "round button"%> <%=link_to "Done", action: 'edit', :id => @question.survey_id %>
 <% end %>
   </div>
   </div>
