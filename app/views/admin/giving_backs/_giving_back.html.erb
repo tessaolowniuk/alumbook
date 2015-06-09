@@ -2,7 +2,7 @@
 <div class="opportunity panel radius" data-expandable>
   <div class="pack pack-middle">
     <%= link_to giving_back.user, class: 'pack-item opportunity-avatar' do %>
-      <img src="http://placehold.it/300x300" alt="User avatar" />
+      <%= image_tag giving_back.user.avatar.url(:thumb) %>
     <% end %>
     <div class="pack-item">
       <% unless giving_back.internship? %>
