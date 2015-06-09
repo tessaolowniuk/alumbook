@@ -18,7 +18,7 @@ class SearchadminsController < ApplicationController
     end
     
     # Check database for a match
-    @search = Login.search(params[:q].try(:merge, m: 'or'))
+    @search = Login.search(params[:q])
     @searchadmin = @search.result
     @search.build_condition if @search.conditions.empty?
     
@@ -26,8 +26,8 @@ class SearchadminsController < ApplicationController
     session[:sResult] = Array.new
   end
   
-  # Define Searchadmins/show.html.erb actions
-  def show
+  # Define Searchadmins/add.html.erb actions
+  def add
     @objectIds = session[:sResult]
   end
 end

@@ -3,24 +3,14 @@
   <div class="large-12 columns">
     <table>
       <tr>
-<%=@survey.survey_name %>
+
+
+
 
 
 
   <% @question.each do |q|%>
-  <%= q.text %>
+  
 
-<%= form_for :user_survey_responses, url: survey_index_path do |f| %>
-
-
-<%= f.text_area :response_text %>
-<%= f.submit %><br><br>
-
-<% end %>
-
-<% end %>
-
-</tr>
-
-</table>
-
+  <%= render "answer", q: q %>
+  <%end%>

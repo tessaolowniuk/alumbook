@@ -22,15 +22,8 @@ module SearchusersHelper
   # Profile image will be retrieved from assets/images/user_img file
   # No profile image should be saved in any other format besides .jpg 
   def display_basic_search_results(objects)
-    count = 1
-    holder = Array.new(3)
     objects.each_with_object('') do |object, string|
-      holder[count - 1] = content_tag(:div, content_tag(:div, tag("img", src: "/assets/user_img/" + object.send(:id).to_s + ".JPG"), class: "row") + display_basic_search_results_row(object), class: ["large-3", "small-3", "columns"], align: "center")
-      if (count % 3 == 0) || (count == objects.size)
-        string << content_tag(:div, holder[0] + content_tag(:div, "",class: ["large-1", "small-1", "columns"]) + holder[1] + content_tag(:div, "",class: ["large-1", "small-1", "columns"]) + holder[2] + content_tag(:div, "",class: ["large-1", "small-1", "columns"]))#code
-        count = 0
-      end
-      count += 1        
+      string << content_tag(:div, content_tag(:div, content_tag(:div, tag("img", src: "/assets/user_img/" + object.send(:id).to_s + ".JPG"), class: "row") + display_basic_search_results_row(object), class: ["large-3", "small-3", "columns"], align: "center") + content_tag(:div, "",class: ["large-1", "small-1", "columns"]))#code        
     end
   end
   
