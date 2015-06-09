@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   belongs_to :company
   has_one :saved_lists, through: :saved_list_users
   has_many :surveys, through: :user_surveys
-  has_many :giving_backs
+  has_many :giving_backs, dependent: :destroy
   has_many :user_phones, dependent: :destroy
   has_many :undergraduate_degrees, dependent: :destroy
   has_many :graduate_degrees, dependent: :destroy

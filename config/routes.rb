@@ -10,7 +10,7 @@ Rails.application.routes.draw do
       root to: 'devise/sessions#new', as: :unauthenticated_root
     end
   end
-  
+
   get 'searchadmins/add' => 'searchadmins#add'
   get 'searchadmins/index'
 
@@ -81,7 +81,7 @@ Rails.application.routes.draw do
       get 'completed', on: :collection
       get 'archived', on: :collection
     end
-    resources :logins
+    resources :accounts
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

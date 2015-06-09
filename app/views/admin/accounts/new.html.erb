@@ -1,0 +1,17 @@
+<!--Brad Bilter -->
+<!--RESTful action SHOW standard route-->
+<div class="row">
+  <div class="small-8 medium-6 large-4 small-centered columns">
+    <h1>New Account</h1>
+    <div class="panel">
+      <%= form_for @login, url: admin_accounts_path do |f| %>
+        <!--Hidden fields required for Devise helper to add the record-->
+        <% f.hidden_field :created_at, value: DateTime.now %>
+        <% f.hidden_field :updated_at, value: DateTime.now %>
+        <%= f.hidden_field :last_sign_in_at, value: DateTime.now %>
+        <%= render 'form', f: f, include_type: true %>
+        <%= f.submit 'Create account', class: 'small success button' %>
+      <% end %>
+    </div>
+  </div>
+</div>

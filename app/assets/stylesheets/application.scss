@@ -366,6 +366,8 @@ input[type="submit"]:last-child {
 }
 
 .actions {
+  text-align: right;
+
   > li .button {
     margin-bottom: 0;
 
@@ -388,4 +390,13 @@ input[type="submit"]:last-child {
       padding-top: rem-calc(16);
     }
   }
+}
+
+.form {
+  list-style-type: none;
+  margin-left: 0;
+
+   > li {
+     display: block;
+   }
 }

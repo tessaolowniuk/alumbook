@@ -10,7 +10,7 @@ class Login < ActiveRecord::Base
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable,
          :authentication_keys => [:logon]
-  has_one :user
+  has_one :user, dependent: :destroy
   self.inheritance_column = nil
 
   enum type: [ :worker, :admin, :user ]
@@ -36,6 +36,11 @@ class Login < ActiveRecord::Base
 
   def authorized_to_edit_profile?(id)
     id == user.id
+  end
+
+  def authorized_to_edit_account?(id)
+    login = Login.find(id)
+    (admin? && !login.admin?) || self.id == id || (worker? && login.user?)
   end
 
   def full_name

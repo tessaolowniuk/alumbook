@@ -1,5 +1,6 @@
 # Created by Tim Schneider and Maxwell Barvian
 class UserController < AuthenticatedController
+  before_filter :redirect_admins!, only: :index
   before_filter lambda{ unauthorized() unless current_login.authorized_to_show_profile? params[:id].to_i }, only: :show
   before_filter lambda{ unauthorized() unless current_login.authorized_to_edit_profile? params[:id].to_i }, only: [:edit, :update, :destroy_avatar]
 
@@ -59,6 +60,10 @@ class UserController < AuthenticatedController
   end
 
   private
+
+  def redirect_admins!
+    redirect_to '/admin/accounts#index' if current_login.worker? || current_login.admin?
+  end
 
   def user_params
     # Lord give me strength

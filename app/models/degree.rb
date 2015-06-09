@@ -1,7 +1,7 @@
-# Created by Victor
+# Created by Victor, edited by Maxwell Barvian
 class Degree < ActiveRecord::Base
   self.inheritance_column = nil # Allows the type column to be used without interfering with Rails' conventions
-  
+
   def self.humanize_type(type)
     humanized_types = {
       aa: 'Associate of Arts (A.A)',
