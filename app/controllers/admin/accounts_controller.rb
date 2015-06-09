@@ -37,10 +37,10 @@ class Admin::AccountsController < AdminController
 
     # Test for save successful and react
     if @login.save
-      flash[:success] = "Login created"
+      flash[:success] = "Account created"
       redirect_to action: 'index'
     else
-      flash[:alert] = "Login NOT created"
+      flash[:alert] = "Account NOT created"
       redirect_to :back
     end
   end
@@ -51,10 +51,10 @@ class Admin::AccountsController < AdminController
 
     #Test for save successful and react
     if @login.update(login_params)
-      flash[:success] = "Login updated"
+      flash[:success] = "Account updated"
       redirect_to action: 'show'
     else
-      flash[:alert] = "Login NOT updated"
+      flash[:alert] = "Account NOT updated"
       redirect_to :back
     end
   end
@@ -70,10 +70,10 @@ class Admin::AccountsController < AdminController
     #Test for delete successful and react
     @login = Login.find(params[:id])
     if @login.destroy
-      flash[:success] = "Login deleted"
+      flash[:success] = "Account deleted"
       redirect_to :action => 'index'
     else
-      flash[:alert] = "Login NOT deleted"
+      flash[:alert] = "Account NOT deleted"
     end
   end
 
