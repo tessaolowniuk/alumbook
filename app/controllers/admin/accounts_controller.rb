@@ -12,10 +12,6 @@ class Admin::AccountsController < AdminController
   #Show users by ID selected
   def show
     @login = Login.find(params[:id])
-    #Make sure USER exists for LOGIN otherwise don't create object
-    if User.exists?(params[:id])
-      @user = User.find(params[:id])
-    end
   end
 
   def new
@@ -24,10 +20,6 @@ class Admin::AccountsController < AdminController
   #Selects existing user by selected ID to display
   def edit
     @login = Login.find(params[:id])
-    #Make sure USER exists for LOGIN otherwise don't create object
-    if User.exists?(params[:id])
-      @user = User.find(params[:id])
-    end
   end
 
   #Create new user with params hash
@@ -61,12 +53,6 @@ class Admin::AccountsController < AdminController
 
   # Delete records
   def destroy
-    #Foreign key in user requires a delete of the user first if exists
-    if User.exists?(params[:id])
-      @user = User.find(params[:id])
-      @user.destroy
-    end
-
     #Test for delete successful and react
     @login = Login.find(params[:id])
     if @login.destroy
