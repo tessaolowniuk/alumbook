@@ -1,99 +1,70 @@
 <% # Author: Maxwell Barvian %>
-<%= form_for @opportunity do |f| %>
-<%= f.hidden_field :type %>
+<h1 class="centered">Submit <%= header_for_giving_back_type(@opportunity.type) %></h1>
 <div class="row">
-  <div class="small-8 small-centered columns">
-    <h1>Submit <%= header_for_giving_back_type(@opportunity.type) %></h1>
-    <% if @opportunity.needs_subject? %>
-      <div class="row <%= error_class @opportunity, :subject %>">
-        <div class="small-3 columns">
-          <%= f.label :subject, class: 'right inline' %>
-        </div>
-        <div class="small-9 columns">
-          <%= f.text_field :subject %>
-          <%= errors @opportunity, :subject %>
-        </div>
-      </div>
-    <% end %>
-    <% if @opportunity.needs_position? %>
-      <div class="row <%= error_class @opportunity, :position %>">
-        <div class="small-3 columns">
-          <%= f.label :position, class: 'right inline' %>
-        </div>
-        <div class="small-9 columns">
-          <%= f.text_field :position %>
-          <%= errors @opportunity, :position %>
-        </div>
-      </div>
-    <% end %>
-    <% if @opportunity.needs_company? %>
-      <div class="row <%= error_class @opportunity.company, :company_name %>">
-        <% @opportunity.build_company if @opportunity.needs_company? %>
-        <%= f.fields_for :company do |f_company| %>
-          <div class="small-3 columns">
-            <%= f_company.label :company_name, 'Company', class: 'right inline' %>
-          </div>
-          <div class="small-9 columns">
-            <%= f_company.autocomplete_field :company_name, autocomplete_company_name_giving_backs_path %>
-            <%= errors @opportunity.company, :company_name %>
-          </div>
+  <div class="small-10 medium-8 large-6 small-centered columns">
+    <div class="panel">
+      <%= form_for @opportunity do |f| %>
+      <%= f.hidden_field :type %>
+      <ol class="form">
+        <% if @opportunity.needs_subject? %>
+          <li class="<%= error_class @opportunity, :subject %>">
+            <%= f.label :subject %>
+            <%= f.text_field :subject %>
+            <%= errors @opportunity, :subject %>
+          </li>
         <% end %>
-      </div>
-    <% end %>
-    <% if @opportunity.needs_requirements? %>
-      <div class="row <%= error_class @opportunity, :requirements %>">
-        <div class="small-3 columns">
-          <%= f.label :requirements, class: 'right inline' %>
-        </div>
-        <div class="small-9 columns">
-          <%= f.text_area :requirements, rows: 6 %>
-          <%= errors @opportunity, :requirements %>
-        </div>
-      </div>
-    <% end %>
-    <div class="row <%= error_class @opportunity, :description %>">
-      <div class="small-3 columns">
-        <%= f.label :description, class: 'right inline' %>
-      </div>
-      <div class="small-9 columns">
-        <%= f.text_area :description, rows: 6 %>
-        <%= errors @opportunity, :description %>
-      </div>
-    </div>
-    <fieldset>
-      <legend class="has-border">Contact</legend>
-      <div class="row">
-        <div class="small-3 columns <%= error_class @opportunity, :contact_first_name, :contact_last_name %>">
-          <%= f.label :contact_first_name, 'Contact name', class: 'right inline' %>
-        </div>
-        <div class="small-9 columns">
-          <div class="row">
-            <div class="small-6 columns <%= error_class @opportunity, :contact_first_name %>">
-              <%= f.text_field :contact_first_name, placeholder: 'First' %>
-              <%= errors @opportunity, :contact_first_name %>
-            </div>
-            <div class="small-6 columns <%= error_class @opportunity, :contact_last_name %>">
-              <%= f.text_field :contact_last_name, placeholder: 'Last' %>
-              <%= errors @opportunity, :contact_last_name %>
-            </div>
+        <% if @opportunity.needs_position? %>
+          <li class="<%= error_class @opportunity, :position %>">
+            <%= f.label :position %>
+            <%= f.text_field :position %>
+            <%= errors @opportunity, :position %>
+          </li>
+        <% end %>
+        <% if @opportunity.needs_company? %>
+          <li class="<%= error_class @opportunity.company, :company_name %>">
+            <% @opportunity.build_company if @opportunity.needs_company? %>
+            <%= f.fields_for :company do |f_company| %>
+              <%= f_company.label :company_name, 'Company' %>
+              <%= f_company.autocomplete_field :company_name, autocomplete_company_name_giving_backs_path %>
+              <%= errors @opportunity.company, :company_name %>
+            <% end %>
+          </li>
+        <% end %>
+        <% if @opportunity.needs_requirements? %>
+          <li class="<%= error_class @opportunity, :requirements %>">
+            <%= f.label :requirements %>
+            <%= f.text_area :requirements, rows: 6 %>
+            <%= errors @opportunity, :requirements %>
+          </li>
+        <% end %>
+        <li class="<%= error_class @opportunity, :description %>">
+          <%= f.label :description %>
+          <%= f.text_area :description, rows: 6 %>
+          <%= errors @opportunity, :description %>
+        </li>
+      </ol>
+      <fieldset>
+        <legend class="has-border">Contact</legend>
+        <div class="row">
+          <div class="small-6 columns <%= error_class @opportunity, :contact_first_name %>">
+            <%= f.label :contact_first_name, 'First name' %>
+            <%= f.text_field :contact_first_name %>
+            <%= errors @opportunity, :contact_first_name %>
+          </div>
+          <div class="small-6 columns <%= error_class @opportunity, :contact_last_name %>">
+            <%= f.label :contact_first_name, 'Last name' %>
+            <%= f.text_field :contact_last_name %>
+            <%= errors @opportunity, :contact_last_name %>
           </div>
         </div>
-      </div>
-      <div class="row <%= error_class @opportunity, :contact_email %>">
-        <div class="small-3 columns">
-          <%= f.label :contact_email, class: 'right inline' %>
-        </div>
-        <div class="small-9 columns">
+        <div class="<%= error_class @opportunity, :contact_email %>">
+          <%= f.label :contact_email %>
           <%= f.email_field :contact_email %>
           <%= errors @opportunity, :contact_email %>
         </div>
-      </div>
-    </fieldset>
-    <div class="row">
-      <div class="small-9 small-push-3 columns">
-        <%= f.submit 'Submit opportunity', class: 'success button' %>
-      </div>
+      </fieldset>
+      <%= f.submit 'Submit opportunity', class: 'small success button' %>
+      <% end %>
     </div>
   </div>
 </div>
-<% end %>

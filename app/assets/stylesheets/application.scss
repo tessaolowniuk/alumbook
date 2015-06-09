@@ -42,6 +42,10 @@ a {
   &.alert { color: $alert-color; }
 }
 
+.centered {
+  text-align: center;
+}
+
 [role="main"] {
   padding-bottom: $footer-height + $footer-margin-top;
   margin-bottom: -$footer-height;
