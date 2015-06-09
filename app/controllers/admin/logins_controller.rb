@@ -32,18 +32,20 @@ class Admin::LoginsController < AdminController
 
     #Create new user with params hash
     def create
-            @login = Login.new(login_params)
-        #Test for save successful and react
-        if @login.save
-            flash[:success] = "Login created"
-          redirect_to :action => 'index'
-        else
-            flash[:alert] = "Login NOT created"
-            redirect_to :action => 'index'
-        end
+      @login = Login.new(login_params)
+      @login.build_user
+
+      # Test for save successful and react
+      if @login.save
+        flash[:success] = "Login created"
+        redirect_to :action => 'index'
+      else
+        flash[:alert] = "Login NOT created"
+        redirect_to :action => 'index'
+      end
     end
 
-    #Updates selected user received on submit from edit
+    # Updates selected user received on submit from edit
     def update
       @login = Login.find(params[:id])
 
@@ -57,7 +59,7 @@ class Admin::LoginsController < AdminController
         end
     end
 
-    #Delete records
+    # Delete records
     def destroy
         #Foreign key in user requires a delete of the user first if exists
         if User.exists?(params[:id])

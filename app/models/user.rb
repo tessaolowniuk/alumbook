@@ -1,6 +1,5 @@
-# Created by Victor, edited by Maxwell Barvian
+# Created by Victor, edited by Leiyang Guo and Maxwell Barvian
 class User < ActiveRecord::Base
-
   # Generates CSV of
   def self.to_csv(options = {})
     CSV.generate(options) do |csv|
@@ -11,17 +10,23 @@ class User < ActiveRecord::Base
     end
   end
 
-  # set association
+  # Leiyang Guo set association
   belongs_to :login
   belongs_to :company
-  # has_many :saved_lists, through: :saved_list_users
-  # has_many :surveys, through: :user_surveys
+  has_one :saved_lists, through: :saved_list_users
+  has_many :surveys, through: :user_surveys
   has_many :giving_backs
   has_many :user_phones, dependent: :destroy
   has_many :undergraduate_degrees, dependent: :destroy
   has_many :graduate_degrees, dependent: :destroy
 
+  # PaperClip avatar
+  has_attached_file :avatar, styles: { full: '500x500#', medium: '300x300#', thumb: '100x100#' }, default_url: '/images/profile.svg'
+
   enum status: [ :currently_enrolled, :alumni ]
+  enum state: Geography::US_STATES.keys.map { |k| k.to_sym }
+
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
   accepts_nested_attributes_for :login
   accepts_nested_attributes_for :company

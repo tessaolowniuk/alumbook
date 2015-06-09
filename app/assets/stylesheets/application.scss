@@ -38,6 +38,10 @@ body {
   }
 }
 
+a {
+  &.alert { color: $alert-color; }
+}
+
 [role="main"] {
   padding-bottom: $footer-height + $footer-margin-top;
   margin-bottom: -$footer-height;
@@ -304,30 +308,37 @@ fieldset {
     text-align: left;
   }
 
+  > :last-child {
+    margin-bottom: 0;
+  }
+
   legend {
-    display: inline-block;
     margin-bottom: $legend-margin-bottom;
     position: relative;
-    text-align: center;
     text-transform: $legend-text-transform;
 
-    &::before, &::after {
-      border-top: $fieldset-border-width $fieldset-border-style $fieldset-border-color;
-      content: '';
-      position: absolute;
-      margin-top: -($fieldset-border-width / 2);
-      top: 50%;
-      width: 100em;
-    }
+    &.has-border {
+      display: inline-block;
+      text-align: center;
 
-    &::before {
-      margin-right: 0.75em;
-      right: 100%;
-    }
+      &::before, &::after {
+        border-top: $fieldset-border-width $fieldset-border-style $fieldset-border-color;
+        content: '';
+        position: absolute;
+        margin-top: -($fieldset-border-width / 2);
+        top: 50%;
+        width: 100em;
+      }
 
-    &::after {
-      left: 100%;
-      margin-left: 0.75em;
+      &::before {
+        margin-right: 0.75em;
+        right: 100%;
+      }
+
+      &::after {
+        left: 100%;
+        margin-left: 0.75em;
+      }
     }
   }
 }
@@ -350,7 +361,7 @@ fieldset {
   cursor: pointer;
 }
 
-input[type="submit"] {
+input[type="submit"]:last-child {
   margin-top: rem-calc(20);
 }
 
@@ -360,6 +371,21 @@ input[type="submit"] {
 
     &:not(:hover):not(:active) {
       background-color: $gainsboro;
+    }
+  }
+}
+
+.block-list {
+  list-style-type: none;
+  margin-left: 0;
+
+  > * {
+    display: block;
+
+    + * {
+      border-top: 1px dotted $gainsboro;
+      margin-top: rem-calc(10);
+      padding-top: rem-calc(16);
     }
   }
 }
