@@ -47,7 +47,7 @@
                 <td class="saved_list_td"><%= user.street %></td>
                 <td class="saved_list_td"><%= user.city %></td>
                 <td class="saved_list_td"><%= user.state %></td>
-                <td class="saved_list_td"><!-- If there is a company --><% if @company != nil %><%= @company.name %><% end %></td>
+                <td class="saved_list_td"><!-- If there is a company --><% if @company != nil %><%= @company.company_name %><% end %></td>
               </tr>
             <% end %>
           <% end %>

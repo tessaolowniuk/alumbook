@@ -37,7 +37,7 @@
             <Cell><Data ss:Type="String"><%= user.street %></Data></Cell>
             <Cell><Data ss:Type="String"><%= user.city %></Data></Cell>
             <Cell><Data ss:Type="String"><%= user.state %></Data></Cell>
-            <Cell><Data ss:Type="String"><!-- If there is a company --><% if @company != nil %><%= @company.name %><% end %></Data></Cell>
+            <Cell><Data ss:Type="String"><!-- If there is a company --><% if @company != nil %><%= @company.company_name %><% end %></Data></Cell>
           </Row>
         <% end %>
       <% end %>
@@ -77,7 +77,7 @@
             <% @survey_questions.each do |survey_question| %>
                 <!-- Switch on survey question type for different row output -->
                 <% case survey_question.type when 'short_answer' %>
-                
+
                 <!-- Obtain and display this user's short answer response -->
                   <% @user_survey_response = UserSurveyResponse.where('user_survey_id = ? and survey_question_id = ?', @user_survey.id, survey_question.id) %>
                   <% @user_survey_response.each do |user_survey_response| %>
