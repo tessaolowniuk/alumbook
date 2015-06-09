@@ -40,7 +40,7 @@ class Login < ActiveRecord::Base
 
   def authorized_to_edit_account?(id)
     login = Login.find(id)
-    admin? || self.id == id || (worker? && login.user?)
+    (admin? && !login.admin?) || self.id == id || (worker? && login.user?)
   end
 
   def full_name
