@@ -164,12 +164,14 @@
           </fieldset>
           <fieldset>
             <legend>Graduate Degrees</legend>
-            <div id="undergraduate_degrees">
-              <% @user.graduate_degrees.build if @user.graduate_degrees.empty? %>
-              <%= f.fields_for :graduate_degrees do |f_grad_degree| %>
-                <%= render 'graduate_degree_fields', f: f_grad_degree %>
-                <%= link_to_add_association 'add degree', f, :graduate_degrees %>
-              <% end %>
+            <div class="block-list">
+              <div id="undergraduate_degrees">
+                <% @user.graduate_degrees.build if @user.graduate_degrees.empty? %>
+                <%= f.fields_for :graduate_degrees do |f_grad_degree| %>
+                  <%= render 'graduate_degree_fields', f: f_grad_degree %>
+                  <%= link_to_add_association 'add degree', f, :graduate_degrees %>
+                <% end %>
+              </div>
             </div>
           </fieldset>
         </section>
