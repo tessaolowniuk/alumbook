@@ -1,3 +1,4 @@
+<!Form to create a new Survey >
 <div class="row">
   <div class="large-12 columns">
   <h1>Create a New Survey</h1>
@@ -17,6 +18,7 @@
   <p>
 
   <%= f.hidden_field :date_created, value: Date.today%>
+
 </p>
 <p>
 
@@ -25,7 +27,7 @@
 
 
 </p>
-  <%= f.submit %>
+  <%= f.submit "Submit", :class => "round button" %>
 <% end %>
   </div>
   </div>

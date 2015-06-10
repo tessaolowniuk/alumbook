@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'searchadmins/add' => 'searchadmins#add'
   get 'searchadmins/index'
 
   resources :searchadmins do
@@ -29,6 +30,7 @@ Rails.application.routes.draw do
   get 'contact' => 'contact#index'
   get 'survey/index' => 'survey#index'
   get 'report/index' => 'report#index'
+
   get 'survey_admin/edit' => 'survey_admin#edit'
   post 'survey_admin/edit' => 'survey_admin#edit'
   get 'survey_admin/choices' => 'survey_admin#choices'
@@ -45,6 +47,7 @@ Rails.application.routes.draw do
   get 'survey_admin/publish' => 'survey_admin#publish'
   get 'survey/take' => 'survey#take'
   post 'report/show' => 'report#show'
+  post 'survey/take' => 'survey#take'
 
   post 'report/create' => 'report#create'
 
@@ -64,7 +67,7 @@ Rails.application.routes.draw do
   end
 
   resources :survey_admin, only: [:new,:new_q, :add, :create, :edit, :index, :choices, :sub_questions]
-
+  resources :survey, only: [:index, :take, :create, :add]
   resources :internships, only: [:index]
   resources :giving_backs, only: [:create] do
     get :autocomplete_company_name, :on => :collection
@@ -78,7 +81,7 @@ Rails.application.routes.draw do
       get 'completed', on: :collection
       get 'archived', on: :collection
     end
-    resources :logins
+    resources :accounts
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
