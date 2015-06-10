@@ -1,4 +1,4 @@
-<%=form_for :user_survey_response, url: survey_index_path do |f|%>
+
 <%=f.hidden_field :survey_id, value: q.survey_id %>
 <%=f.hidden_field :question_id, value: q%>
 
@@ -9,6 +9,3 @@
 <%=f.check_box :survey_question_option_id, value: o %><br>
 <%end%>
 <br>
-<%=f.submit "Submit", :class => "round button"%>
-
-<%end%>

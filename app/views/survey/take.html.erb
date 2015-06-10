@@ -5,12 +5,33 @@
       <tr>
 
 
+      
 
 
 
+
+<%= form_for :user_survey_response, url: survey_index_path do |form|%>
 
   <% @question.each do |q|%>
-  
+  <%=fields_for :user_survey_response  do |f|%>
 
-  <%= render "answer", q: q %>
+
+  <br><br><%=q.text%>
+
+  <%if q.type=="short_answer"%>
+  <%= render "short", {f: f, q: q} %>
+  <%end%>
+  <%if q.type=="single_choice"%>
+  <%= render "single", {f: f, q: q} %>
+  <%end%>
+  <%if q.type=="multi_choice"%>
+  <%= render "multi", {f: f, q: q} %>
+  <%end%>
+  <%if q.type=="sub_questions"%>
+  <%= render "sub", {f: f, q: q} %>
+  <%end%>
+
+  <%end%>
+  <%end%>
+  <%=form.submit%>
   <%end%>

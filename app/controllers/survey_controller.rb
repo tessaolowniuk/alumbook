@@ -18,12 +18,14 @@ class SurveyController < AuthenticatedController
   end
 def add
 end
+def new
+end
   def create
     # render plain: params[:survey].inspect
 
     @response = UserSurveyResponse.new(option_params)
     @response.save
-    redirect_to survey_index_path, :id => @response.survey_question_id
+    redirect_to survey_index_path
   end
 
 private
