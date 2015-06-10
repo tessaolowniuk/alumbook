@@ -1,6 +1,6 @@
 # author: Brett Bush
 
-class ReportController < ApplicationController
+class ReportController < AuthenticatedController
 
   # Display: views/report/index.html.erb
   def index

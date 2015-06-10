@@ -1,6 +1,6 @@
 # author: Brett Bush
 
-class SavedListsController < ApplicationController
+class SavedListsController < AuthenticatedController
   before_action :set_saved_list, only: [:show, :edit, :update, :destroy]
 
   # Display: views/saved_list/index.html.erb
