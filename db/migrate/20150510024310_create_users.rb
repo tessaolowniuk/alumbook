@@ -8,7 +8,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :email_addr
       t.string :street
       t.string :city
-      t.string :state
+      t.integer :state
       t.integer :zip
       #t.references :user_job, index: true, foreign_key: true
       t.string :first_name

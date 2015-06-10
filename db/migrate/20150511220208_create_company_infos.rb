@@ -5,7 +5,7 @@ class CreateCompanyInfos < ActiveRecord::Migration
       t.references :company, index: true, foreign_key: true
       t.string :street
       t.string :city
-      t.string :state
+      t.integer :state
       t.integer :zip
       t.integer :country_code
       t.integer :area_code

@@ -1,6 +1,6 @@
-# Author: Maxwell Barvian, Edited by Tessa Olowniuk
+# Author: Maxwell Barvian
 class ChangeStateFormatInCompanyInfosTable < ActiveRecord::Migration
   def change
-    change_column :company_infos, :state, :string
+    change_column :company_infos, :state, :integer
   end
 end
