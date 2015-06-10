@@ -46,11 +46,11 @@ SurveyQuestion.create!([
   {survey_id: 7, type: "short_answer", display_order: 0, text: "Where was your favorite vacation?", required: false},
   {survey_id: 8, type: "single_choice", display_order: 0, text: "Cubs or Sox?", required: false},
   {survey_id: 9, type: "multi_choice", display_order: 0, text: "Select all fruits you like.", required: false},
-  {survey_id: 10, type: "sub_questions", display_order: 0, text: "Rank these Pixar Movies from 1 to 3.", required: false},
+  {survey_id: 10, type: "sub_questions", display_order: 0, text: "Rank these Pixar Movies from 1 to 4.", required: false},
   {survey_id: 11, type: "short_answer", display_order: 0, text: "Where was your favorite vacation?", required: false},
   {survey_id: 11, type: "single_choice", display_order: 1, text: "Cubs or Sox?", required: false},
   {survey_id: 11, type: "multi_choice", display_order: 2, text: "Select all fruits you like.", required: false},
-  {survey_id: 11, type: "sub_questions", display_order: 3, text: "Rank these Pixar Movies from 1 to 3.", required: false}
+  {survey_id: 11, type: "sub_questions", display_order: 3, text: "Rank these Pixar Movies from 1 to 4.", required: false}
 ])
 SurveyQuestionOption.destroy_all
 SurveyQuestionOption.create!([
@@ -60,29 +60,29 @@ SurveyQuestionOption.create!([
   {survey_question_id: 3, display_order: 1, text: "Banana"},
   {survey_question_id: 3, display_order: 2, text: "Orange"},
   {survey_question_id: 3, display_order: 3, text: "Watermelon"},
-  {survey_question_id: 4, display_order: 0, text: "Toy Story"},
-  {survey_question_id: 4, display_order: 1, text: "Monsters Inc."},
-  {survey_question_id: 4, display_order: 2, text: "Up"},
-  {survey_question_id: 4, display_order: 3, text: "WALL-E"},
+  {survey_question_id: 4, display_order: 0, text: "1 (bad)"},
+  {survey_question_id: 4, display_order: 1, text: "2"},
+  {survey_question_id: 4, display_order: 2, text: "3"},
+  {survey_question_id: 4, display_order: 3, text: "4 (good)"},
   {survey_question_id: 6, display_order: 0, text: "Cubs"},
   {survey_question_id: 6, display_order: 1, text: "Sox"},
   {survey_question_id: 7, display_order: 0, text: "Apple"},
   {survey_question_id: 7, display_order: 1, text: "Banana"},
   {survey_question_id: 7, display_order: 2, text: "Orange"},
   {survey_question_id: 7, display_order: 3, text: "Watermelon"},
-  {survey_question_id: 8, display_order: 0, text: "Toy Story"},
-  {survey_question_id: 8, display_order: 1, text: "Monsters Inc."},
-  {survey_question_id: 8, display_order: 2, text: "Up"},
-  {survey_question_id: 8, display_order: 3, text: "WALL-E"}
+  {survey_question_id: 8, display_order: 0, text: "1 (bad)"},
+  {survey_question_id: 8, display_order: 1, text: "2"},
+  {survey_question_id: 8, display_order: 2, text: "3"},
+  {survey_question_id: 8, display_order: 3, text: "4 (good)"}
 ])
 SurveyQuestionOptionsChoice.destroy_all
 SurveyQuestionOptionsChoice.create!([
-  {survey_question_id: 4, display_order:0, text: "1 (bad)"},
-  {survey_question_id: 4, display_order:1, text: "2"},
-  {survey_question_id: 4, display_order:2, text: "3 (good)"},
-  {survey_question_id: 8, display_order:0, text: "1 (bad)"},
-  {survey_question_id: 8, display_order:1, text: "2"},
-  {survey_question_id: 8, display_order:2, text: "3 (good)"}
+  {survey_question_id: 4, display_order:0, text: "Toy Story"},
+  {survey_question_id: 4, display_order:1, text: "WALL-E"},
+  {survey_question_id: 4, display_order:2, text: "Up"},
+  {survey_question_id: 8, display_order:0, text: "Toy Story"},
+  {survey_question_id: 8, display_order:1, text: "WALL-E"},
+  {survey_question_id: 8, display_order:2, text: "Up"}
 ])
 UserSurvey.destroy_all
 UserSurvey.create!([
@@ -108,25 +108,22 @@ UserSurveyResponse.create!([
   {user_survey_id: 6, survey_question_id: 3, survey_question_option_id: 4, survey_question_options_choice_id: nil, response_text: nil},
   {user_survey_id: 6, survey_question_id: 3, survey_question_option_id: 5, survey_question_options_choice_id: nil, response_text: nil},
   {user_survey_id: 6, survey_question_id: 3, survey_question_option_id: 6, survey_question_options_choice_id: nil, response_text: nil},
-  {user_survey_id: 7, survey_question_id: 4, survey_question_option_id: 7, survey_question_options_choice_id: 3, response_text: nil},
+  {user_survey_id: 7, survey_question_id: 4, survey_question_option_id: 7, survey_question_options_choice_id: 1, response_text: nil},
   {user_survey_id: 7, survey_question_id: 4, survey_question_option_id: 8, survey_question_options_choice_id: 2, response_text: nil},
-  {user_survey_id: 7, survey_question_id: 4, survey_question_option_id: 9, survey_question_options_choice_id: 3, response_text: nil},
-  {user_survey_id: 7, survey_question_id: 4, survey_question_option_id: 10, survey_question_options_choice_id: 1, response_text: nil},
+  {user_survey_id: 7, survey_question_id: 4, survey_question_option_id: 10, survey_question_options_choice_id: 3, response_text: nil},
   {user_survey_id: 8, survey_question_id: 5, survey_question_option_id: nil, survey_question_options_choice_id: nil, response_text: "The Wisconsin Dells"},
   {user_survey_id: 8, survey_question_id: 6, survey_question_option_id: 11, survey_question_options_choice_id: nil, response_text: nil},
   {user_survey_id: 8, survey_question_id: 7, survey_question_option_id: 14, survey_question_options_choice_id: nil, response_text: nil},
   {user_survey_id: 8, survey_question_id: 7, survey_question_option_id: 16, survey_question_options_choice_id: nil, response_text: nil},
-  {user_survey_id: 8, survey_question_id: 8, survey_question_option_id: 17, survey_question_options_choice_id: 5, response_text: nil},
-  {user_survey_id: 8, survey_question_id: 8, survey_question_option_id: 18, survey_question_options_choice_id: 4, response_text: nil},
-  {user_survey_id: 8, survey_question_id: 8, survey_question_option_id: 19, survey_question_options_choice_id: 5, response_text: nil},
   {user_survey_id: 8, survey_question_id: 8, survey_question_option_id: 20, survey_question_options_choice_id: 4, response_text: nil},
+  {user_survey_id: 8, survey_question_id: 8, survey_question_option_id: 17, survey_question_options_choice_id: 5, response_text: nil},
+  {user_survey_id: 8, survey_question_id: 8, survey_question_option_id: 19, survey_question_options_choice_id: 6, response_text: nil},
   {user_survey_id: 9, survey_question_id: 5, survey_question_option_id: nil, survey_question_options_choice_id: nil, response_text: "San Francisco"},
   {user_survey_id: 9, survey_question_id: 6, survey_question_option_id: 12, survey_question_options_choice_id: nil, response_text: nil},
   {user_survey_id: 9, survey_question_id: 7, survey_question_option_id: 14, survey_question_options_choice_id: nil, response_text: nil},
   {user_survey_id: 9, survey_question_id: 7, survey_question_option_id: 13, survey_question_options_choice_id: nil, response_text: nil},
   {user_survey_id: 9, survey_question_id: 7, survey_question_option_id: 15, survey_question_options_choice_id: nil, response_text: nil},
-  {user_survey_id: 9, survey_question_id: 8, survey_question_option_id: 17, survey_question_options_choice_id: 5, response_text: nil},
-  {user_survey_id: 9, survey_question_id: 8, survey_question_option_id: 18, survey_question_options_choice_id: 6, response_text: nil},
-  {user_survey_id: 9, survey_question_id: 8, survey_question_option_id: 19, survey_question_options_choice_id: 5, response_text: nil},
+  {user_survey_id: 9, survey_question_id: 8, survey_question_option_id: 19, survey_question_options_choice_id: 4, response_text: nil},
+  {user_survey_id: 9, survey_question_id: 8, survey_question_option_id: 18, survey_question_options_choice_id: 5, response_text: nil},
   {user_survey_id: 9, survey_question_id: 8, survey_question_option_id: 20, survey_question_options_choice_id: 6, response_text: nil}
 ])
