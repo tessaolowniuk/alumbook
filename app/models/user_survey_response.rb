@@ -1,4 +1,4 @@
-#Created by Tessa, Modified by Victor
+#Created by Tessa, Modified by Victor, Jeff, Max
 class UserSurveyResponse < ActiveRecord::Base
   self.inheritance_column = nil
   belongs_to :user_survey
@@ -8,6 +8,7 @@ class UserSurveyResponse < ActiveRecord::Base
 
   validates :response_text, presence: true, if: :should_validate_response_text
   validates :survey_question_option, presence: true, if: :should_validate_survey_question_option
+  
 
   accepts_nested_attributes_for :survey_question_option
   accepts_nested_attributes_for :survey_question_options_choice
@@ -19,4 +20,5 @@ class UserSurveyResponse < ActiveRecord::Base
   def should_validate_survey_question_option
     ['single_choice', 'multi_choice'].include?(survey_question.type) && survey_question.required?
   end
+
 end
