@@ -69,7 +69,7 @@ Rails.application.routes.draw do
   end
   resources :survey_question, :controller => "survey_admin"
   resources :survey_admin, only: [:new,:new_q, :add, :create, :edit, :index, :choices, :sub_questions,  :survey_question_option]
-  resources :surveys, only: [:index, :edit, :update]
+  resources :surveys, only: [:index, :show, :create]
   resources :internships, only: [:index]
   resources :giving_backs, only: [:create] do
     get :autocomplete_company_name, :on => :collection

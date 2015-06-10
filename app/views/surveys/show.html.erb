@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="large-8 columns">
+    <%= form_for build_responses(@usersurvey), url: surveys_path do |f| %>
+        <%= f.fields_for :user_survey_responses do |f_response| %>
+          <% r = f_response.object %>
+          <% q = r.survey_question %>
+          <%= f_response.hidden_field :survey_question_id %>
+          <%= render q.type, q: q, r: r, f: f_response %>
+        <% end %>
+      <%= submit_tag 'Submit', class: 'small success button' %>
+    <% end %>
+  </div>
+</div>
