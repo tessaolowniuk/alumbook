@@ -1,0 +1,24 @@
+<%=q.text%>
+<div class="row">
+  <div class="large-12 columns">
+    <table>
+      <tr>
+      <td></td>
+  <% q.survey_question_options.each do |o| %>
+
+      <td><%= o.text %></td>
+      <%end%>
+    </tr>
+      <% q.survey_question_options_choices.each do |s| %>
+<tr>
+      <td><%= s.text%></td>
+      <%q.survey_question_options.each do |o|%>
+      <td><%=f.check_box :survey_question_option_id %></td>
+      <%= f.hidden_field :survey_question_option_id, value: o.id %>
+      <%end%>
+      <%end%>
+
+          </tr>
+
+    </table><br>
+  
