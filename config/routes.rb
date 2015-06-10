@@ -37,7 +37,7 @@ Rails.application.routes.draw do
   post 'survey_admin/choices' => 'survey_admin#choices'
   get 'survey_admin/sub_questions' => 'survey_admin/sub_questions'
   post 'survey_admin/sub_questions' => 'survey_admin/sub_questions'
-
+  post 'survey/create' => 'survey#create'
 
   get 'saved_lists/index' => 'saved_lists#index'
   post 'saved_lists/create' => 'saved_lists#create'
@@ -59,15 +59,19 @@ Rails.application.routes.draw do
   get '/saved_lists/:id', to: 'saved_lists#show', as: 'saved_list'
   post '/saved_lists/:id', to: 'saved_lists#show'
 
+
+
   delete '/saved_lists/:id', to: 'saved_lists#destroy'
+
+  delete '/survey_admin/:id', to:'survey_admin#destroy'
 
   resources :user do
     get :autocomplete_company_name, on: :collection
     delete :avatar, on: :member
   end
-
-  resources :survey_admin, only: [:new,:new_q, :add, :create, :edit, :index, :choices, :sub_questions]
-  resources :survey, only: [:index, :take, :create, :add]
+  resources :survey_question, :controller => "survey_admin"
+  resources :survey_admin, only: [:new,:new_q, :add, :create, :edit, :index, :choices, :sub_questions,  :survey_question_option]
+  resources :survey, only: [:index, :take, :create, :add, :new]
   resources :internships, only: [:index]
   resources :giving_backs, only: [:create] do
     get :autocomplete_company_name, :on => :collection

@@ -9,24 +9,29 @@ class SurveyController < AuthenticatedController
 #take a survey. creates base survey and loads in partial for each question
   def take
   @survey = Survey.find(params[:id])
-  @usersurvey = UserSurvey.new(:survey_id => @survey.id)
-
-  @usersurvey.save
 
   @question = SurveyQuestion.where(survey_id: params[:survey_id]) rescue nil
 
   end
 def add
 end
+
   def create
     # render plain: params[:survey].inspect
+    #@survey = UserSurvey.new(survey_params)
+    #@survey.save
 
-    @response = UserSurveyResponse.new(option_params)
-    @response.save
-    redirect_to survey_index_path, :id => @response.survey_question_id
+    #@survey.user_survey_response = UserSurveyResponse.new(option_params)
+    #@survey.user_survey_response.update_attributes(user_survey_id: @survey)
+    #@survey.survey_user_response.save
+    redirect_to survey_index_path
   end
 
 private
+
+def survey_params
+  params.require(:user_survey).permit(:user_id, :survey_id, :date_completed, :anonymous, :created_at, :updated_at)
+end
 
 
   def option_params
