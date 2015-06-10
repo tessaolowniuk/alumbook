@@ -38,14 +38,14 @@ GivingBack.create!([
 ])
 SurveyQuestion.destroy_all
 SurveyQuestion.create!([
-  {survey_id: 7, type: "short_answer", display_order: 0, text: "Where was your favorite vacation?", required: false},
-  {survey_id: 8, type: "single_choice", display_order: 0, text: "Cubs or Sox?", required: false},
-  {survey_id: 9, type: "multi_choice", display_order: 0, text: "Select all fruits you like.", required: false},
-  {survey_id: 10, type: "sub_questions", display_order: 0, text: "Rank these Pixar Movies from 1 to 4.", required: false},
-  {survey_id: 11, type: "short_answer", display_order: 0, text: "Where was your favorite vacation?", required: false},
-  {survey_id: 11, type: "single_choice", display_order: 1, text: "Cubs or Sox?", required: false},
-  {survey_id: 11, type: "multi_choice", display_order: 2, text: "Select all fruits you like.", required: false},
-  {survey_id: 11, type: "sub_questions", display_order: 3, text: "Rank these Pixar Movies from 1 to 4.", required: false}
+  {survey_id: 1, type: "short_answer", display_order: 0, text: "Where was your favorite vacation?", required: false},
+  {survey_id: 2, type: "single_choice", display_order: 0, text: "Cubs or Sox?", required: false},
+  {survey_id: 3, type: "multi_choice", display_order: 0, text: "Select all fruits you like.", required: false},
+  {survey_id: 4, type: "sub_questions", display_order: 0, text: "Rank these Pixar Movies from 1 to 4.", required: false},
+  {survey_id: 5, type: "short_answer", display_order: 0, text: "Where was your favorite vacation?", required: false},
+  {survey_id: 5, type: "single_choice", display_order: 1, text: "Cubs or Sox?", required: false},
+  {survey_id: 5, type: "multi_choice", display_order: 2, text: "Select all fruits you like.", required: false},
+  {survey_id: 5, type: "sub_questions", display_order: 3, text: "Rank these Pixar Movies from 1 to 4.", required: false}
 ])
 SurveyQuestionOption.destroy_all
 SurveyQuestionOption.create!([
@@ -81,15 +81,15 @@ SurveyQuestionOptionsChoice.create!([
 ])
 UserSurvey.destroy_all
 UserSurvey.create!([
-  {user_id: 3, survey_id: 7, date_completed: "2015-06-08", anonymous: false},
-  {user_id: 3, survey_id: 8, date_completed: "2015-06-09", anonymous: false},
-  {user_id: 4, survey_id: 8, date_completed: "2015-06-09", anonymous: false},
-  {user_id: 3, survey_id: 9, date_completed: "2015-06-09", anonymous: false},
-  {user_id: 4, survey_id: 9, date_completed: "2015-06-09", anonymous: false},
-  {user_id: 5, survey_id: 9, date_completed: "2015-06-09", anonymous: false},
-  {user_id: 4, survey_id: 10, date_completed: "2015-06-09", anonymous: false},
-  {user_id: 3, survey_id: 11, date_completed: "2015-06-09", anonymous: false},
-  {user_id: 4, survey_id: 11, date_completed: "2015-06-09", anonymous: false}
+  {user_id: 3, survey_id: 1, date_completed: "2015-06-08", anonymous: false},
+  {user_id: 3, survey_id: 2, date_completed: "2015-06-09", anonymous: false},
+  {user_id: 4, survey_id: 2, date_completed: "2015-06-09", anonymous: false},
+  {user_id: 3, survey_id: 3, date_completed: "2015-06-09", anonymous: false},
+  {user_id: 4, survey_id: 3, date_completed: "2015-06-09", anonymous: false},
+  {user_id: 5, survey_id: 3, date_completed: "2015-06-09", anonymous: false},
+  {user_id: 4, survey_id: 4, date_completed: "2015-06-09", anonymous: false},
+  {user_id: 3, survey_id: 5, date_completed: "2015-06-09", anonymous: false},
+  {user_id: 4, survey_id: 5, date_completed: "2015-06-09", anonymous: false}
 ])
 UserSurveyResponse.destroy_all
 UserSurveyResponse.create!([
