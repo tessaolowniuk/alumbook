@@ -17,10 +17,10 @@ class SearchusersController < ApplicationController
     end
     
     # Check database for a matching user
-    @search = Login.joins('LEFT OUTER JOIN users ON users.login_id = logins.id').search(params[:q])
+    #@search = Login.joins('LEFT OUTER JOIN users ON users.login_id = logins.id').search(params[:q])
     
     #uncomment code below if searchable attribute is FUNCTIONAL
-    #@search = Login.joins('LEFT OUTER JOIN users ON users.login_id = logins.id').where('users.searchable = true').search(params[:q])
+    @search = Login.joins('LEFT OUTER JOIN users ON users.login_id = logins.id').where('users.searchable = true').search(params[:q])
     
     @searchusers = @search.result
   end

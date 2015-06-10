@@ -23,7 +23,7 @@ module SearchusersHelper
   # No profile image should be saved in any other format besides .jpg 
   def display_basic_search_results(objects)
     objects.each_with_object('') do |object, string|
-      string << content_tag(:div, content_tag(:div, content_tag(:div, tag("img", src: "/assets/user_img/" + object.send(:id).to_s + ".JPG"), class: "row") + display_basic_search_results_row(object), class: ["large-3", "small-3", "columns"], align: "center") + content_tag(:div, "",class: ["large-1", "small-1", "columns"]))#code        
+      string << content_tag(:div, content_tag(:div, content_tag(:div, content_tag(:div, tag("img", src: User.find(object.send(:id)).avatar.url(:full), class: "profile-avatar"), class: "row") + display_basic_search_results_row(object), class: ["large-3", "small-3", "columns"], align: "center") + content_tag(:div, "",class: ["large-1", "small-1", "columns"])))#code        
     end
   end
   
