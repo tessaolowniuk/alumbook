@@ -21,6 +21,7 @@ class SurveysController < AuthenticatedController
   def create
     @usersurvey = UserSurvey.new(user_survey_params)
     @usersurvey.user = current_login.user
+    @usersurvey.date_completed = Date.today
 
     if @usersurvey.save
       flash[:success] = "Survey completed."
