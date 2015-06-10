@@ -4,6 +4,7 @@
         <%= f.hidden_field :survey_id %>
         <%= f.fields_for :user_survey_responses do |f_response| %>
           <% r = f_response.object %>
+
           <% q = r.survey_question %>
           <%= f_response.hidden_field :survey_question_id %>
           <%= render q.type, q: q, r: r, f: f_response %>
