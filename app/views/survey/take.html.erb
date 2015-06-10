@@ -5,15 +5,19 @@
       <tr>
 
 
-      
 
 
 
 
-<%= form_for :user_survey_response, url: survey_index_path do |form|%>
+
+<%= form_for :user_survey, url: 'create' do |form|%>
+<%=form.hidden_field :survey_id, value: @survey%>
+<%=form.hidden_field :date_completed, value: Date.today%>
+
 
   <% @question.each do |q|%>
   <%=fields_for :user_survey_response  do |f|%>
+  <%=f.hidden_field :survey_question_id, value: q.id%>
 
 
   <br><br><%=q.text%>

@@ -1,19 +1,30 @@
 
-<%=f.hidden_field :survey_id, value: q.survey_id %>
-<%=f.hidden_field :question_id, value: q%>
+
 
 <%options = SurveyQuestionOption.where(survey_question_id: q)%>
 <%subs = SurveyQuestionOptionsChoice.where(survey_question_id: q)%>
 <br><br>
-<%options.each do |o|%>
-<%= o.text %>
-<%end%>
-  <%subs.each do |s|%>
-  <br><%=s.text %>
-  <%options.each do |o|%>
 
 
-<%=f.radio_button :survey_question_option_id, value: s %>
-<%end%>
-<%end%>
-<br>
+
+<div class="row">
+  <div class="large-12 columns">
+    <table>
+      <tr>
+      <td></td>
+  <% options.each do |o| %>
+
+      <td><%= o.text %></td>
+      <%end%>
+    </tr>
+      <%subs.each do |s| %>
+<tr>
+      <td><%= s.text%></td>
+      <%options.each do |o|%>
+      <td><%=f.check_box :survey_question_option_id, value: s %></td>
+      <%end%>
+      <%end%>
+
+          </tr>
+
+    </table><br>

@@ -1,6 +1,5 @@
 
-<%=f.hidden_field :survey_id, value: q.survey_id %>
-<%=f.hidden_field :question_id, value: q%>
+
 
 <%options = SurveyQuestionOption.where(survey_question_id: q)%>
 
