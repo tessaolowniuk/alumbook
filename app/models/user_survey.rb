@@ -1,4 +1,4 @@
-#Created by Tessa, Modified by Victor
+#Created by Tessa, Modified by Victor, Jeff, Max
 class UserSurvey < ActiveRecord::Base
   self.inheritance_column = nil
   belongs_to :user
