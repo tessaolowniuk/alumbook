@@ -13,7 +13,7 @@
 <% if s.status == "published"  %>
       <td><%= s.survey_name%></td>
 
-      <td><%= link_to 'take', edit_survey_path(s) %></td>
+      <td><%= link_to 'take', s %></td>
           </tr>
       <% end %>
       <% end %>

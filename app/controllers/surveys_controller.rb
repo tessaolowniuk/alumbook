@@ -8,8 +8,9 @@ class SurveysController < AuthenticatedController
   end
 
   # Take a survey. creates base survey and loads in partial for each question
-  def edit
+  def show
     @survey = Survey.find(params[:id])
+    @usersurvey = @survey.user_surveys.build
 
     unless @survey && @survey.status == 'published'
       flash[:alert] = "Survey not found."
@@ -17,27 +18,27 @@ class SurveysController < AuthenticatedController
     end
   end
 
-  def update
-    @survey = Survey.find(params[:id])
+  def create
+    @usersurvey = UserSurvey.new(user_survey_params)
+    @usersurvey.user = current_login.user
 
-    if @survey.update(survey_params)
+    if @usersurvey.save
       flash[:success] = "Survey completed."
       redirect_to action: 'index'
     else
-      render 'edit'
+      render 'show'
     end
   end
 
   private
 
-  def survey_params
-    params.require(:survey).permit(
-      user_surveys_attributes: [:id, :user_id,
-        user_survey_responses_attributes: [:id,
-          :survey_question_id,
-          :survey_question_option_id,
-          :response_text
-        ]
+  def user_survey_params
+    params.require(:user_survey).permit(
+      :survey_id, :user_id,
+      user_survey_responses_attributes: [:id,
+        :survey_question_id,
+        :survey_question_option_id,
+        :response_text
       ]
     )
   end
