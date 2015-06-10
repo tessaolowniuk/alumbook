@@ -48,7 +48,7 @@
         <!-- Obtain this user's user_survey for this survey -->
         <% @user_survey = UserSurvey.where('user_id = ? and survey_id = ?', user.id, @survey.id).first %>
         <tr>
-          <td class="report_results_td"><!-- If there is a login --><% if @login != nil %><%= link_to(@login.username, "/admin/logins/" + @login.id.to_s) %><% end %></td>
+          <td class="report_results_td"><!-- If there is a login --><% if @login != nil %><%= link_to(@login.username, user_path(user)) %><% end %></td>
           <td class="report_results_td"><%= @user_survey.date_completed %></td>
 
           <!-- If there are survey questions -->
