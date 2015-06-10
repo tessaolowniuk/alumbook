@@ -221,7 +221,7 @@ class ReportController < ApplicationController
       @survey = Survey.find(@survey_id)
 
       # Obtain survey questions of selected survey in display order
-      @survey_questions = SurveyQuestion.where('survey_id = ?', @survey.id).order('display_order DESC')
+      @survey_questions = SurveyQuestion.where('survey_id = ?', @survey.id).order('display_order ASC')
 
       # Obtain all Users who have taken this survey
       @users = User.joins('INNER JOIN user_surveys ON user_surveys.user_id = users.id').where('user_surveys.survey_id = ?', @survey_id)
@@ -233,11 +233,13 @@ class ReportController < ApplicationController
       @survey_id = params[:survey_select]
       @survey = Survey.find(@survey_id)
 
+      @username = params[:user_name]
+
       # Obtain survey questions of selected survey in display order
-      @survey_questions = SurveyQuestion.where('survey_id = ?', @survey.id).order('display_order DESC')
+      @survey_questions = SurveyQuestion.where('survey_id = ?', @survey.id).order('display_order ASC')
 
       # Obtain all Users who have taken this survey
-      @users = User.joins('INNER JOIN user_surveys ON user_surveys.user_id = users.id').where('user_surveys.survey_id = ?', @survey_id)
+      @users = User.joins('INNER JOIN user_surveys ON user_surveys.user_id = users.id').joins('INNER JOIN logins ON logins.id = users.login_id').where('user_surveys.survey_id = ? and logins.username = ?', @survey_id, @username)
 
     # (?) Unknown Report
     else

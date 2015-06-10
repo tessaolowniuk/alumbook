@@ -39,7 +39,7 @@
             <Cell><Data ss:Type="String"><%= user.street %></Data></Cell>
             <Cell><Data ss:Type="String"><%= user.city %></Data></Cell>
             <Cell><Data ss:Type="String"><%= user.state %></Data></Cell>
-            <Cell><Data ss:Type="String"><!-- If there is a company --><% if @company != nil %><%= @company.name %><% end %></Data></Cell>
+            <Cell><Data ss:Type="String"><!-- If there is a company --><% if @company != nil %><%= @company.company_name %><% end %></Data></Cell>
           </Row>
         <% end %>
       <% end %>
