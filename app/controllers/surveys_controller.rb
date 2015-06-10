@@ -30,7 +30,7 @@ class SurveysController < AuthenticatedController
 
   def survey_params
     params.require(:survey).permit(
-      user_surveys_attributes: [
+      user_surveys_attributes: [:id, :user_id,
         user_survey_responses_attributes: [:id, :response_text]
       ]
     )

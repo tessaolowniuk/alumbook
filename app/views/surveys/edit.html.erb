@@ -1,8 +1,9 @@
 <div class="row">
   <div class="large-8 columns">
     <%= form_for @survey do |f| %>
-      <% usersurvey = @survey.user_surveys.build(user: current_login.user) %>
+      <% usersurvey = UserSurvey.find_by(user: current_login.user, survey: @survey) || @survey.user_surveys.build(user: current_login.user) %>
       <%= f.fields_for :user_surveys, build_responses(usersurvey) do |f_us| %>
+        <%= f_us.hidden_field :user_id %>
         <%= f_us.fields_for :user_survey_responses do |f_response| %>
           <% q = f_response.object.survey_question %>
           <%= render q.type, q: q, f: f_response %>
