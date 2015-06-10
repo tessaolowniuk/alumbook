@@ -28,6 +28,7 @@ user_phone41 = UserPhone.create(user_id: user4.id, area_code: '815', prefix: '26
 college6 = College.create(college_name: 'University of Chicago')
 degree6 = Degree.create(major_name: 'Computer Science', type: 3)
 undergraduate_degree4 = UndergraduateDegree.create(user_id: user4.id, college_id: college6.id, degree_id: degree6.id, graduation_date: '2012-12-21')
+
 degree7 = Degree.create(major_name: 'Computer Science', type: 5)
 college7 = College.create(college_name: 'North Central College')
 graduate_degree5 = GraduateDegree.create(user_id: user4.id, college_id: college7.id, degree_id: degree7.id, graduation_date: '2014-6-21', status: 0)
