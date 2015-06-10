@@ -1,4 +1,6 @@
+<%=  q.text%><br>
 <% q.survey_question_options.each do |o| %>
+
   <%= f.label :survey_question_option_id, o.text %>
-  <%= f.radio_button :survey_question_option_id, o.id %>
-<% end %>
+  <%= f.radio_button :survey_question_option_id, o.id %><br>
+<% end %><br>
