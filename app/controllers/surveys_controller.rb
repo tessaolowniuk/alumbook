@@ -21,9 +21,11 @@ class SurveysController < AuthenticatedController
     @survey = Survey.find(params[:id])
 
     if @survey.update(survey_params)
+      flash[:success] = "Survey completed."
+      redirect_to action: 'index'
+    else
+      render 'edit'
     end
-
-    redirect_to :back
   end
 
   private
@@ -31,7 +33,11 @@ class SurveysController < AuthenticatedController
   def survey_params
     params.require(:survey).permit(
       user_surveys_attributes: [:id, :user_id,
-        user_survey_responses_attributes: [:id, :response_text]
+        user_survey_responses_attributes: [:id,
+          :survey_question_id,
+          :survey_question_option_id,
+          :response_text
+        ]
       ]
     )
   end

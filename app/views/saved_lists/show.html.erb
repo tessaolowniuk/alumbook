@@ -13,7 +13,7 @@
     <button type="button" class="button small noprint" onclick="saved_list_print_page();">Print</button>
 
     <!-- Table for displaying user information -->
-    <div class="user_listing" style="overflow-x:scroll;overflow-y:scroll;height:400px;width:100%;">
+    <div id="scroll_table" class="user_listing" style="overflow-x:scroll;overflow-y:scroll;height:400px;width:100%;">
       <table class="saved_list_table">
         <thead>
           <tr>
@@ -39,7 +39,7 @@
               <% @company = Company.find_by_id(user.company_id) %>
               <% @user_phones = UserPhone.where('user_id = ?', user.id) %>
               <tr>
-                <td class="saved_list_td"><!-- If there is a login --><% if @login != nil %><%= @login.username %><% end %></td>
+                <td class="saved_list_td"><!-- If there is a login --><% if @login != nil %><%= link_to(@login.username, user_path(user)) %><% end %></td>
                 <td class="saved_list_td"><!-- If there is a login --><% if @login != nil %><%= @login.first_name %><% end %></td>
                 <td class="saved_list_td"><!-- If there is a login --><% if @login != nil %><%= @login.middle_initial %><% end %></td>
                 <td class="saved_list_td"><!-- If there is a login --><% if @login != nil %><%= @login.last_name %><% end %></td>
@@ -54,5 +54,6 @@
         </tbody>
       </table>
     </div>
+    <%= link_to "Back to My Lists", "/saved_lists/index", :class => "button small" %>
   </div>
 </div>
