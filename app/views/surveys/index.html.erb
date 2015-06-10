@@ -7,13 +7,13 @@
 
         <th colspan="4"></th>
       </tr>
-  <% @survey.each do |s|%>
+  <% @surveys.each do |s|%>
     <tr>
 
 <% if s.status == "published"  %>
       <td><%= s.survey_name%></td>
 
-      <td><%= link_to 'take', action: 'take', :id => s, :survey_id => s %></td>
+      <td><%= link_to 'take', edit_survey_path(s) %></td>
           </tr>
       <% end %>
       <% end %>

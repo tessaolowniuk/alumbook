@@ -1,0 +1,4 @@
+<% q.survey_question_options.each do |o|%>
+  <%=f.label o.text %>
+  <%=f.check_box :survey_question_option_id, value: o %>
+<% end %>
