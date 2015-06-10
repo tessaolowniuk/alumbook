@@ -9,12 +9,7 @@ Login.create!([
 ])
 Survey.destroy_all
 Survey.create!([
-  {login_id: nil, survey_name: "Test Survey_1", survey_description: "Test Survey_1", date_created: nil, status: nil},
-  {login_id: nil, survey_name: "Test Survey_2", survey_description: "Test Survey_2", date_created: nil, status: nil},
-  {login_id: nil, survey_name: "Test Survey_3", survey_description: "Test Survey_3", date_created: nil, status: nil},
-  {login_id: nil, survey_name: "Test Survey_4", survey_description: "Test Survey_4", date_created: nil, status: nil},
-  {login_id: nil, survey_name: "Test Survey_5", survey_description: "Test Survey_5", date_created: nil, status: nil},
-  {login_id: nil, survey_name: "Test Survey_6", survey_description: "Test Survey_6", date_created: nil, status: nil},
+
   {login_id: 1, survey_name: "Short Answer Survey", survey_description: "A short answer survey regarding your travel experiences.", date_created: "2015-06-08", status: "published"},
   {login_id: 1, survey_name: "Single Choice Survey", survey_description: "A single choice survey about your Chicago baseball loyalty.", date_created: "2015-06-09", status: "published"},
   {login_id: 1, survey_name: "Multiple Choice Survey", survey_description: "A multiple choice survey about your favorite fruit.", date_created: "2015-06-09", status: "published"},
