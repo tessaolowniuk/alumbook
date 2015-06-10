@@ -1,7 +1,7 @@
 <!-- author: Brett Bush -->
 
 <!-- Table for displaying user information -->
-<div class="user_listing" style="overflow-x:scroll;overflow-y:scroll;height:400px;width:100%;">
+<div id="scroll_table" class="user_listing" style="overflow-x:scroll;overflow-y:scroll;height:400px;width:100%;">
   <table class="report_results_table">
     <thead>
       <tr>
@@ -27,7 +27,7 @@
           <% @company = Company.find_by_id(user.company_id) %>
           <% @user_phones = UserPhone.where('user_id = ?', user.id) %>
           <tr>
-            <td class="report_results_td"><!-- If there is a login --><% if @login != nil %><%= @login.username %><% end %></td>
+            <td class="report_results_td"><!-- If there is a login --><% if @login != nil %><%= link_to(@login.username, "/admin/logins/" + @login.id.to_s) %><% end %></td>
             <td class="report_results_td"><!-- If there is a login --><% if @login != nil %><%= @login.first_name %><% end %></td>
             <td class="report_results_td"><!-- If there is a login --><% if @login != nil %><%= @login.middle_initial %><% end %></td>
             <td class="report_results_td"><!-- If there is a login --><% if @login != nil %><%= @login.last_name %><% end %></td>

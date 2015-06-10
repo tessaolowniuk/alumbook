@@ -46,31 +46,41 @@
     <% elsif @report_id.to_i == 7 || @report_id.to_i == 8 %>
     <Table>
       <Row>
-      <!-- If there are survey questions -->
-      <% if @survey_questions != nil %>
-        <!-- For each survey question, display text as column header -->
-        <% @survey_questions.each do |survey_question| %>
-          <!-- Display question text -->
-          <Cell><Data ss:Type="String">(<%= survey_question.display_order.to_i + 1 %>) <%= survey_question.text %></Data></Cell>
-          <!-- If multi_choice or sub_question type, list out options in header -->
-          <% if survey_question.type == "multi_choice" || survey_question.type == "sub_questions" %>
-            <!-- Obtain survey question options in display order -->
-            <% @survey_question_options = SurveyQuestionOption.where("survey_question_id = ?", survey_question.id).order('display_order DESC') %>
-            <!-- For each survey question option, display a sepereate column header -->
-            <% @survey_question_options.each do |survey_question_option| %>
-              <Cell><Data ss:Type="String"><%= survey_question_option.text %></Data></Cell>
+        <Cell><Data ss:Type="String">Username</Data></Cell>
+        <Cell><Data ss:Type="String">Date Completed</Data></Cell>
+
+        <!-- If there are survey questions -->
+        <% if @survey_questions != nil %>
+          <!-- For each survey question, display text as column header -->
+          <% @survey_questions.each do |survey_question| %>
+            <!-- Display question text -->
+            <Cell><Data ss:Type="String">(<%= survey_question.display_order.to_i + 1 %>) <%= survey_question.text %></Data></Cell>
+            <!-- If multi_choice or sub_question type, list out options in header -->
+            <% if survey_question.type == "sub_questions" %>
+              <!-- Obtain survey question options in display order -->
+              <% @survey_question_options = SurveyQuestionOption.where("survey_question_id = ?", survey_question.id).order('display_order ASC') %>
+              <!-- For each survey question option, display a sepereate column header -->
+              <% @survey_question_options.each do |survey_question_option| %>
+                <Cell><Data ss:Type="String"><%= survey_question_option.text %></Data></Cell>
+              <% end %>
             <% end %>
           <% end %>
         <% end %>
-      <% end %>
       </Row>
       <!-- If there are users -->
       <% if @users != nil %>
       <!-- For each user, display their survey response information in alignment with headers -->
       <% @users.each do |user| %>
+
+        <!-- Obtain this user's login information -->
+        <% @login = Login.find(user.login_id) %>
+
         <!-- Obtain this user's user_survey for this survey -->
-        <% @user_survey = UserSurvey.where('user_id = ? and survey_id = ?', user.id, @survey.id) %>
-        <tr>
+        <% @user_survey = UserSurvey.where('user_id = ? and survey_id = ?', user.id, @survey.id).first %>
+        <Row>
+
+          <Cell><Data ss:Type="String"><!-- If there is a login --><% if @login != nil %><%= @login.username %><% end %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= @user_survey.date_completed %></Data></Cell>
           <!-- If there are survey questions -->
           <% if @survey_questions != nil %>
             <!-- For each survey question, display this user's response -->
@@ -87,24 +97,25 @@
                 <% when 'single_choice' %>
                   <% @user_survey_response = UserSurveyResponse.where('user_survey_id = ? and survey_question_id = ?', @user_survey.id, survey_question.id) %>
                   <% @user_survey_response.each do |user_survey_response| %>
-                    <Cell><Data ss:Type="String"><%= user_survey_response.response_text %></Data></Cell>
+                    <% @survey_question_option = SurveyQuestionOption.find(user_survey_response.survey_question_option_id) %>
+                    <Cell><Data ss:Type="String"><%= @survey_question_option.text %></Data></Cell>
                   <% end %>
                 <!-- Obtain and display this user's multiple choice responses -->
-                <% when 'multi_choice' %>
-                  <% @survey_question_options = SurveyQuestionOption.where("survey_question_id = ?", survey_question.id).order('display_order DESC') %>
-                  <% @survey_question_options.each do |survey_question_option| %>
-                    <% @user_survey_response = UserSurveyResponse.where('user_survey_id = ? and survey_question_id = ? and survey_question_option_id = ?', @user_survey.id, survey_question.id, survey_question_option.id) %>
-                    <% @user_survey_response.each do |user_survey_response| %>
-                      <Cell><Data ss:Type="String"><%= user_survey_response.response_text %></Data></Cell>
-                    <% end %>
-                  <% end %>
+                <% when "multi_choice" %>
+                  <% @user_survey_responses = UserSurveyResponse.where('user_survey_id = ? and survey_question_id = ?', @user_survey.id, survey_question.id) %>
+
+                  <!-- Display comma seperated values for response -->
+                  <Cell><Data ss:Type="String"><% @user_survey_responses.each do |user_survey_response| %><% @survey_question_option = SurveyQuestionOption.find(user_survey_response.survey_question_option_id) %><%= @survey_question_option.text %><%= ", " unless user_survey_response == @user_survey_responses.last %><% end %></Data></Cell>
                 <!-- Obtain and display this user's subquestion responses -->
-                <% when 'sub_questions' %>
+                <% when "sub_questions" %>
+                  <Cell><Data ss:Type="String"></Data></Cell>
                   <% @survey_question_options = SurveyQuestionOption.where("survey_question_id = ?", survey_question.id).order('display_order DESC') %>
                   <% @survey_question_options.each do |survey_question_option| %>
                     <% @user_survey_response = UserSurveyResponse.where('user_survey_id = ? and survey_question_id = ? and survey_question_option_id = ?', @user_survey.id, survey_question.id, survey_question_option.id) %>
                     <% @user_survey_response.each do |user_survey_response| %>
-                      <Cell><Data ss:Type="String"><%= user_survey_response.response_text %></Data></Cell>
+                    <% @survey_question_option = SurveyQuestionOption.find(user_survey_response.survey_question_option_id) %>
+                      <% @survey_question_options_choice = SurveyQuestionOptionsChoice.find(user_survey_response.survey_question_options_choice_id) %>
+                      <Cell><Data ss:Type="String"><%= @survey_question_options_choice.text %></Data></Cell>
                     <% end %>
                   <% end %>
                 <!-- Default condition -->
