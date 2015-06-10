@@ -17,10 +17,17 @@ default: &default
 
 
   password: password
+<<<<<<< HEAD
 
   host: localhost
   #port: 3366
   port: 3000
+=======
+  #password: csc495
+  host: localhost
+  port: 3366
+  #port: 3606
+>>>>>>> 8350c71586936674dfe43ff4b6dd21f84e2c2676
 
 
 development:

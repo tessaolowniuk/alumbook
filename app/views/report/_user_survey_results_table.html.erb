@@ -1,10 +1,16 @@
 <!-- author: Brett Bush -->
 
+<h4><%= @survey.survey_name %> Results</h4>
+<h5><%= @survey.survey_description %></h5>
+
 <!-- Table for displaying survey results -->
-<div class="user_listing" style="overflow-x:scroll;overflow-y:scroll;height:400px;width:100%;">
+<div id="scroll_table" class="user_listing" style="overflow-x:scroll;overflow-y:scroll;height:400px;width:100%;">
   <table class="report_results_table">
     <thead>
       <tr>
+        <th class="report_results_td" style="white-space: nowrap">Username</th>
+        <th class="report_results_td" style="white-space: nowrap">Date Completed</th>
+
         <!-- If there are survey questions -->
         <% if @survey_questions != nil %>
 
@@ -12,17 +18,17 @@
           <% @survey_questions.each do |survey_question| %>
 
             <!-- Display question text -->
-            <th class="report_results_td">(<%= survey_question.display_order.to_i + 1 %>) <%= survey_question.text %></th>
+            <th class="report_results_td" style="white-space: nowrap">(<%= survey_question.display_order.to_i + 1 %>) <%= survey_question.text %></th>
 
             <!-- If multi_choice or sub_question type, list out options in header -->
-            <% if survey_question.type == "multi_choice" || survey_question.type == "sub_questions" %>
+            <% if survey_question.type == "sub_questions" %>
 
               <!-- Obtain survey question options in display order -->
-              <% @survey_question_options = SurveyQuestionOption.where("survey_question_id = ?", survey_question.id).order('display_order DESC') %>
+              <% @survey_question_options_choices = SurveyQuestionOptionsChoice.where("survey_question_id = ?", survey_question.id).order('display_order ASC') %>
 
               <!-- For each survey question option, display a sepereate column header -->
-              <% @survey_question_options.each do |survey_question_option| %>
-                <th class="report_results_td"><%= survey_question_option.text %></th>
+              <% @survey_question_options_choices.each do |survey_question_options_choice| %>
+                <th class="report_results_td" style="white-space: nowrap"><%= survey_question_options_choice.text %></th>
               <% end %>
             <% end %>
           <% end %>
@@ -36,13 +42,17 @@
       <!-- For each user, display their survey response information in alignment with headers -->
       <% @users.each do |user| %>
 
+        <!-- Obtain this user's login information -->
+        <% @login = Login.find(user.login_id) %>
+
         <!-- Obtain this user's user_survey for this survey -->
-        <% @user_survey = UserSurvey.where('user_id = ? and survey_id = ?', user.id, @survey.id) %>
+        <% @user_survey = UserSurvey.where('user_id = ? and survey_id = ?', user.id, @survey.id).first %>
         <tr>
+          <td class="report_results_td"><!-- If there is a login --><% if @login != nil %><%= link_to(@login.username, user_path(user)) %><% end %></td>
+          <td class="report_results_td"><%= @user_survey.date_completed %></td>
 
           <!-- If there are survey questions -->
           <% if @survey_questions != nil %>
-
             <!-- For each survey question, display this user's response -->
             <% @survey_questions.each do |survey_question| %>
 
@@ -59,27 +69,30 @@
               <% when "single_choice" %>
                 <% @user_survey_response = UserSurveyResponse.where('user_survey_id = ? and survey_question_id = ?', @user_survey.id, survey_question.id) %>
                 <% @user_survey_response.each do |user_survey_response| %>
-                  <td class="report_results_td"><%= user_survey_response.response_text %></td>
+                  <% @survey_question_option = SurveyQuestionOption.find(user_survey_response.survey_question_option_id) %>
+                  <td class="report_results_td"><%= @survey_question_option.text %></td>
                 <% end %>
 
               <!-- Obtain and display this user's multiple choice responses -->
               <% when "multi_choice" %>
-                <% @survey_question_options = SurveyQuestionOption.where("survey_question_id = ?", survey_question.id).order('display_order DESC') %>
-                <% @survey_question_options.each do |survey_question_option| %>
-                  <% @user_survey_response = UserSurveyResponse.where('user_survey_id = ? and survey_question_id = ? and survey_question_option_id = ?', @user_survey.id, survey_question.id, survey_question_option.id) %>
-                  <% @user_survey_response.each do |user_survey_response| %>
-                    <td class="report_results_td"><%= user_survey_response.response_text %></td>
+                <% @user_survey_responses = UserSurveyResponse.where('user_survey_id = ? and survey_question_id = ?', @user_survey.id, survey_question.id) %>
+                <td class="report_results_td">
+                  <% @user_survey_responses.each do |user_survey_response| %>
+                    <% @survey_question_option = SurveyQuestionOption.find(user_survey_response.survey_question_option_id) %>
+                    <%= @survey_question_option.text %>
+                    <%= ", " unless user_survey_response == @user_survey_responses.last %>
                   <% end %>
-                <% end %>
+                </td>
+
 
               <!-- Obtain and display this user's subquestion responses -->
               <% when "sub_questions" %>
-                <% @survey_question_options = SurveyQuestionOption.where("survey_question_id = ?", survey_question.id).order('display_order DESC') %>
-                <% @survey_question_options.each do |survey_question_option| %>
-                  <% @user_survey_response = UserSurveyResponse.where('user_survey_id = ? and survey_question_id = ? and survey_question_option_id = ?', @user_survey.id, survey_question.id, survey_question_option.id) %>
-                  <% @user_survey_response.each do |user_survey_response| %>
-                    <td class="report_results_td"><%= user_survey_response.response_text %></td>
-                  <% end %>
+                <td class="report_results_td"></td>
+                <% @survey_question_options_choices = SurveyQuestionOptionsChoice.where("survey_question_id = ?", survey_question.id).order('display_order ASC') %>
+                <% @survey_question_options_choices.each do |survey_question_options_choice| %>
+                  <% @user_survey_response = UserSurveyResponse.where('user_survey_id = ? and survey_question_id = ? and survey_question_options_choice_id = ?', @user_survey.id, survey_question.id, survey_question_options_choice.id).first %>
+                  <% @survey_question_option = SurveyQuestionOption.find(@user_survey_response.survey_question_option_id) %>
+                  <td class="report_results_td"><%= @survey_question_option.text %></td>
                 <% end %>
 
               <!-- Default condition -->

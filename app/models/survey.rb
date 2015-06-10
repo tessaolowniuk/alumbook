@@ -4,4 +4,6 @@ class Survey < ActiveRecord::Base
   belongs_to :login
   has_many :user_surveys
   has_many :survey_questions
+
+  accepts_nested_attributes_for :user_surveys
 end

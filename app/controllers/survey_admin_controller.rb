@@ -2,6 +2,7 @@
 #Everything related to Survey_Admin was created by Jeffrey Mayer with the
 #Exception of the .js file that Brett did the googling for to find that
 class SurveyAdminController < AuthenticatedController
+#  before_action :survey_question_option, only: [:show, :edit, :update, :destroy]
   #list of all surveys, ability to add new survey, publish survey
   def index
     @survey = Survey.all rescue nil
@@ -79,6 +80,28 @@ end
 
     end
 
+
+def destroy
+
+
+  @question = SurveyQuestion.find(params[:id])
+  @option = SurveyQuestionOption.where(survey_question_id: params[:id]) rescue nil
+  @sub = SurveyQuestionOptionsChoice.where(survey_question_id: params[:id]) rescue nil
+
+  @sub.each do |s|
+    s.destroy
+  end
+  @option.each do |o|
+    o.destroy
+  end
+  @question.destroy
+  redirect_to :back
+
+
+
+
+
+end
   private
   #Parameter definition for new database entries
   def survey_params

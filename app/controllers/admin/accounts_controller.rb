@@ -33,7 +33,7 @@ class Admin::AccountsController < AdminController
       flash[:success] = "Account created"
       redirect_to action: 'index'
     else
-      # flash[:alert] = "Account NOT created"
+      flash[:alert] = "Account NOT created"
       render 'new'
     end
   end
