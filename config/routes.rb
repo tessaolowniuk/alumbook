@@ -45,9 +45,7 @@ Rails.application.routes.draw do
 
   get 'survey_admin/new_q' => 'survey_admin#new_q'
   get 'survey_admin/publish' => 'survey_admin#publish'
-  get 'survey/take' => 'survey#take'
   post 'report/show' => 'report#show'
-  post 'survey/take' => 'survey#take'
 
   post 'report/create' => 'report#create'
 
@@ -71,7 +69,7 @@ Rails.application.routes.draw do
   end
   resources :survey_question, :controller => "survey_admin"
   resources :survey_admin, only: [:new,:new_q, :add, :create, :edit, :index, :choices, :sub_questions,  :survey_question_option]
-  resources :survey, only: [:index, :take, :create, :add, :new]
+  resources :surveys, only: [:index, :show, :create]
   resources :internships, only: [:index]
   resources :giving_backs, only: [:create] do
     get :autocomplete_company_name, :on => :collection
